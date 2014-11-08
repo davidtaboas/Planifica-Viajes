@@ -1,0 +1,206 @@
+#trip{"ng-controller" => "tripCtrl", "ng-init" => "trip = #{@trip}"}
+  #modal-delete-trip.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "modal-delete-title", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+            %span.sr-only Close
+          %h4#modal-delete-title.modal-title= t("DeleteTripTitle")
+        .modal-body= t("AreYouSure?")
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t("Cancel")
+          %button.btn.btn-primary#confirm-delete-trip{:type => "button", "ng-click" => "removeTrip()"}= t("Accept")
+  .uploader{"nv-file-drop"=>"", "uploader"=>"uploader", "options" => "{url: '/api/t/{{trip.id}}/data/image' }"}
+    .dragdrop
+      .box-info
+        .show-info
+          %h3= t("DragImageHere")
+          %input.btn.btn-info{"nv-file-select"=>"","uploader"=>"uploader","type"=>"file", "options" => "{url: '/api/t/{{trip.id}}/data/image' }"}
+          %button.btn.btn-danger.cancel= t("Cancel")
+  %section#header{"data-speed" => "6", "data-type" => "background", "ng-style" => "tripBackground"}
+    %nav.settings
+      %button.btn.btn-default.visibility
+        %span.glyphicon.glyphicon-globe{"ng-show" => "trip.visibility == 'public'"}
+        %span.glyphicon.glyphicon-eye-open{"ng-show" => "trip.visibility == 'shared'"}
+        %span.glyphicon.glyphicon-eye-close{"ng-show" => "trip.visibility == 'private'"}
+
+      %button.btn.btn-default.change-image
+        %span.glyphicon.glyphicon-picture{}
+      %button.btn.btn-default.delete-trip{"data-target" => "#modal-delete-trip", "data-toggle" => "modal", :type => "button"}
+        %span.glyphicon.glyphicon-remove
+      .clear
+      %form{"role"=>"form"}
+        %input.form-control.sharedkey{"type"=>"text", "ng-show" => "trip.visibility == 'shared'", "value" => "{{sharedUrl}}", "onClick"=>"this.select();"}
+    #sharedpreferences.popover.fade.left.in{:role => "tooltip"}
+      .arrow{:style => "top: 10%;"}
+      %h3.popover-title= t("SharedPreferences")
+      .popover-content
+        .btn-group-vertical
+          %button.btn.btn-default{"ng-click" => "changeVisibility('private')"}
+            %span.glyphicon.glyphicon-eye-close
+            = t("Private")
+          %button.btn.btn-default{"ng-click" => "changeVisibility('shared')"}
+            %span.glyphicon.glyphicon-eye-open
+            = t("Shared")
+          %button.btn.btn-default{"ng-click" => "changeVisibility('public')"}
+            %span.glyphicon.glyphicon-globe
+            = t("Public")
+    .container-fluid.header-info
+      %h1.editable{"ng-model" => "trip.title"} {{trip.title}}
+      %button.btn.btn-success.save-title{"type" => "button", "ng-click" => "saveTitle()"}= t("Save")
+  / Section 2
+  %section#map{"data-speed" => "4", "data-type" => "background", "ng-controller" => "mapCtrl"}
+    / #route
+    %script{:src => "http://maps.google.com/maps/api/js?libraries=places"}
+    %map#route{}
+      %marker{"ng-repeat" => "destination in destinations", "title" => "{{destination.name}}", "position" => "{{destination.coordinates}}", "z-index" => "4"}
+      %shape#polyline{:geodesic => "true", :name => "polyline", :path => "{{linea}}", "stroke-color" => "#647f46", "stroke-opacity" => "1.0", "stroke-weight" => "4"}
+    .panel
+      %input#pac-input.controls{:placeholder => "Search Box", :type => "text"}/
+      %ul.list-group{"ui-sortable"=>"sortableOptions", "ng-model" => "destinations"}
+        %li.list-group-item{"ng-repeat" => "d in destinations"}
+          %span.glyphicon.glyphicon-align-justify
+          %span.badge.remove-dest{"ng-click" => "removeDest($index)"}
+            %span.glyphicon.glyphicon-remove
+          %span.badge {{$index+1}}
+          {{d.name}}
+
+    %button.show-panel{"style" => "display: block"}
+      %span.glyphicon.glyphicon-chevron-down
+    %button.hide-panel{"style" => "display: none"}
+      %span.glyphicon.glyphicon-chevron-up
+  / Section 3
+  %section#content{"data-speed" => "2", "data-type" => "background"}
+    .container-fluid
+      .dates
+        .row
+          .col-md-6
+            %h2
+              = t("StartDate")
+              %small {{ trip.startDate | date:'yyyy-MM-dd' }}
+            %datetimepicker{"data-datetimepicker-config" => "{ startView:'day', minView:'day' }", "data-ng-model" => "trip.startDate", "data-on-set-time"=>"onStartTimeSet(newDate, oldDate)"}
+          .col-md-6
+            %h2
+              = t("EndDate")
+              %small {{ trip.endDate | date:'yyyy-MM-dd' }}
+            %datetimepicker{"data-datetimepicker-config" => "{ startView:'day', minView:'day' }", "data-ng-model" => "trip.endDate", "data-on-set-time"=>"onEndTimeSet(newDate, oldDate)"}
+      .description
+        %h2
+          = t('Description')
+          %button.btn.btn-success.save-description{"type" => "button", "ng-click" => "saveDescription()"}= t("Save")
+        .content.editable{"ng-bind-html" => "trip.description", "ng-model" => "trip.description"}
+        / %p {{trip.image.url}}
+      %hr/
+      .budget{"ng-controller" => "budgetCtrl" }
+        %h2= t('Budget')
+        .row
+          .col-md-6
+            %h4= t('BudgetElements')
+            %table.table.table-hover
+              %thead
+                %tr
+                  %th= t('Item')
+                  %th= t('Units')
+                  %th= t('PriceUnit')
+                  %th= t('Cost')
+                  %th
+              %tbody
+                %tr{"ng-repeat" => "budget in budgets"}
+                  %td
+                    {{budget.description}}
+                    %span.label.label-danger{"ng-if" => "budget.category === 1"}= t('transport')
+                    %span.label.label-success{"ng-if" => "budget.category === 2"}= t('food')
+                    %span.label.label-primary{"ng-if" => "budget.category === 3"}= t('sleep')
+                    %span.label.label-warning{"ng-if" => "budget.category === 4"}= t('others')
+                  %td {{budget.units | number}}
+                  %td {{budget.priceperunit | currency:"€":2}}
+                  %td {{budget.units * budget.priceperunit | currency:"€":2}}
+                  %td
+                    %button.destroy.glyphicon.glyphicon-remove{"ng-click" => "removeBudget(budget)"}
+                %tr
+                  %td
+                    %input.title{"type" => "text", "ng-model" => "newbudget.description"}/
+                    %select.cat{"ng-model" => "newbudget.category", "ng-options"=>"category.id as category.name for category in categories"}
+                  %td
+                    %input.units{"type" => "number", "size" => "2", "value" => "0", "ng-model" => "newbudget.units", "ng-init" => "newbudget.units = 0"}/
+                  %td
+                    %input.price{"type" => "number", "step" => "0.50", "value" => "0", "ng-model" => "newbudget.priceperunit", "ng-init" => "newbudget.priceperunit = 0.00"}/
+                  %td
+                    %span {{newbudget.units * newbudget.priceperunit | currency:"€":2}}
+                  %td
+                    %button.btn.btn-primary{"type" => "button", "ng-click" => "addBudget(newbudget)"}= t("Add")
+                %tr
+                  %td TOTAL
+                  %td
+                  %td
+                  %td
+                  %td {{getTotal | currency:"€":2}}
+          .col-md-6
+            %highchart#chart1{:config => "highchartsNgConfig"}
+      %hr/
+      .extra
+        .row
+          .col-md-6{"ng-controller" => "stuffsCtrl" }
+
+
+            %header
+              %h3= t('Stuffs')
+            %section
+              %table.table.table-hover
+                %thead
+                  %tr
+                    %th #
+                    %th= t("Description")
+                  %tr
+                    %td.status
+                      %div{"ng-show" => "isStuff()"}
+                        %input#toggle-all.glyphicon.glyphicon-save{"ng-click" => "toggleMarkAll()", "ng-model" => "markAll", :type => "checkbox"}/
+                    %td.text
+                      %input#new{"ng-keyup" => "addStuff()", "ng-model" => "stuffText", :placeholder => t("WhatStuff"), :size => "30", :type => "text"}/
+                %tbody
+                  %tr{"ng-repeat" => "stuff in stuffs", "class" => "done-{{stuff.status}}"}
+                    %td.status
+                      %input.glyphicon.glyphicon-ok{"type" => "checkbox", "ng-model"=>"stuff.status", "ng-click" => "changeStatus(stuff)"}
+                    %td.text{"ng-keyup"=>"editTodo()"}
+                      %span{"ng-dblclick" => "toggleEditMode(stuff)", "ng-hide" => "stuff.editing"}  {{stuff.description}}
+                      %input{:autofocus => "", "ng-keyup" => "editOnEnter(stuff)", "ng-model" => "stuff.description", "ng-show" => "stuff.editing"}/
+                      %button.destroy.glyphicon.glyphicon-remove{"ng-click" => "removeItem(stuff)"}
+            %footer{"style"=>"display: block;"}
+              .container-fluid
+                .todo-count
+                  {{remaining()}} {{itemText()}}
+                %button.clear-completed.btn.btn-primary.btn-xs{"ng-click"=>"clear()","ng-show"=>"hasDone()"}
+                  = t("ClearCompleted")
+                  %span ({{(stuffs.length - remaining())}})
+
+          .col-md-6{"ng-controller" => "tasksCtrl"}
+            %header
+              %h3= t('ToDo')
+            %section
+              %table.table.table-hover
+                %thead
+                  %tr
+                    %th #
+                    %th= t("Description")
+                  %tr
+                    %td.status
+                      %div{"ng-show" => "isTask()"}
+                        %input#toggle-all.glyphicon.glyphicon-save{"ng-click" => "toggleMarkAll()", "ng-model" => "markAll", :type => "checkbox"}/
+                    %td.text
+                      %input#new{"ng-keyup" => "addTask()", "ng-model" => "taskText", :placeholder => t("WhatTask"), :size => "30", :type => "text"}/
+                %tbody
+                  %tr{"ng-repeat" => "task in tasks", "class" => "done-{{task.status}}"}
+                    %td.status
+                      %input.glyphicon.glyphicon-ok{"type" => "checkbox", "ng-model"=>"task.status", "ng-click" => "changeStatus(task)"}
+                    %td.text{"ng-keyup"=>"editTodo()"}
+                      %span{"ng-dblclick" => "toggleEditMode(task)", "ng-hide" => "task.editing"}  {{task.description}}
+                      %input{:autofocus => "", "ng-keyup" => "editOnEnter(task)", "ng-model" => "task.description", "ng-show" => "task.editing"}/
+                      %button.destroy.glyphicon.glyphicon-remove{"ng-click" => "removeItem(task)"}
+            %footer{"style"=>"display: block;"}
+              .container-fluid
+                .todo-count
+                  {{remaining()}} {{itemText()}}
+                %button.clear-completed.btn.btn-primary.btn-xs{"ng-click"=>"clear()","ng-show"=>"hasDone()"}
+                  = t("ClearCompleted")
+                  %span ({{(tasks.length - remaining())}})

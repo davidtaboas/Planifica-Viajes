@@ -1,0 +1,32 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap/variables";
+#home {
+  background-image: asset-data-url("home.jpg");
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  #index-info{
+    display: table;
+    .overlay{
+      display: table-cell;
+      height: 100vh;
+      vertical-align: middle;
+      padding: 20px;
+      border-radius: 12px;
+      position: relative;
+      text-align: center;
+      h1{
+        font-size: 3em;
+        color: #ffffff;
+        text-shadow: 0px 3px 10px #333;
+      }
+      h2{
+        color: $gray-lighter;
+      }
+    }
+
+  }
+}

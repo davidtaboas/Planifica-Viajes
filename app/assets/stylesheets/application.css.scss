@@ -1,0 +1,149 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "compass";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+nav.siteNav {
+  position: fixed;
+  outline: none;
+  top: 0;
+  left: -280px;
+  border: none;
+  z-index: 1;
+  .navbar{
+    width: 280px;
+    border-radius: 0px;
+    height: 100vh;
+    border: none;
+
+    form{
+      background: #fff;
+      width: 100%;
+      margin: 0 auto;
+      padding: 10px;
+      border-radius: 12px;
+      a{
+        color: #666;
+        &:hover{
+          color: #333
+        }
+      }
+      .login-true{
+        h4{
+          display: inline;
+          vertical-align: middle;
+        }
+        button{
+          text-align: right;
+        }
+      }
+      .form-group{
+        width: 100%;
+        .control-label{
+          display: none;
+        }
+        input{
+          width: 100%;
+          margin: 10px 0;
+          &[type="password"]{
+            width: 70%;
+          }
+        }
+      }
+      .register{
+
+        a{
+          color: $brand-primary;
+        }
+      }
+
+    }
+  }
+}
+
+#site{
+  height: 100%;
+  // width: calc(100% - 280px);
+  width: auto;
+  // margin-left: 280px;
+  margin-left: 0px;
+  padding: 0px;
+  .page {
+    width: 100%;
+    position: relative;
+
+    nav.navHome{
+
+      position: absolute;
+      top: 0px;
+      left: 0;
+
+      button{
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        height: 50px;
+        width: 50px;
+        display: block;
+        z-index: 1;
+        opacity: 0.6;
+        margin: 0;
+        padding: 0;
+        span {
+          font-size: 30px;
+          line-height: 30px;
+        }
+
+        &:hover{
+          opacity: 1.0;
+          transition: opacity .15s ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+.nomargin {
+  margin: 0px;
+  padding: 0px;
+}
+
+.alert{
+  position: absolute;
+  z-index: 10;
+  margin: 0 auto;
+  width: 50%;
+  margin-left: 50%;
+  left: -25%;
+  top: 30px;
+}
+
+#site, .siteNav{
+    transform: translate3d(0px, 0, 0);
+    transition-duration: 250ms;
+  }
+
+.is-activeNav {
+  overflow-x: hidden;
+  height: 100%;
+  min-height: 100vh;
+
+  #site, .siteNav{
+    transform: translate3d(280px, 0, 0);
+    transition-duration: 250ms;
+  }
+}

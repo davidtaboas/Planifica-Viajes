@@ -1,0 +1,77 @@
+!!! 5
+%html
+  %head
+    %title="Planifica Viajes"
+    = stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag "i18n"
+    = javascript_include_tag "translations"
+    = javascript_tag do
+      I18n.defaultLocale = "#{I18n.default_locale}";
+      I18n.locale = "#{I18n.locale}";
+    = javascript_include_tag 'require', 'data-turbolinks-track' => true
+    = javascript_include_tag params[:controller], 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body{"ng-app" => "PlanificaViajes", "ng-controller" => "login as auth"}
+    %nav.siteNav
+      .navbar.navbar-inverse.nomargin{:role => "navigation"}
+
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => "/", "target" => "_self"} Planifica Viajes
+        .navbar-collapse.collapse{}
+          %form.navbar-form.navbar-right{:role => "form"}
+            %div.login-false{"ng-hide" => "is_login()"}
+              .form-group{"ng-class" => "{ 'has-error' : errorOnLogin() }"}
+
+                %label.control-label{}= t("ErrorOnLogin")
+
+                %input.form-control{:placeholder => "Email", :type => "text", :name => "email", "ng-model" => "formInfo.email", "required" => ""}/
+
+                .clear
+
+                %input.form-control{:placeholder => "Password", :type => "password", :name => "password", "ng-model" => "formInfo.password", "required" => ""}/
+
+                %button.btn.btn-success{:type => "submit", "ng-click" => "login()"}= t('sign_in')
+                .clear
+                .register
+                  = link_to t("Register"), new_user_registration_path
+
+            %div.login-true{"ng-show" => "is_login()"}
+              %h4
+                %span.glyphicon.glyphicon-user
+                %a.navbar-link{:href => "/u/{{username}}", "target" => "_self"} {{username}}
+              %button.btn.btn-success{:type => "submit", "ng-click" => "logout()"}
+                %span.glyphicon.glyphicon-plane
+                = t('log_out')
+
+
+
+
+
+    .container-fluid.temp
+      .alert.alert-info.alert-dismissible{:role => "alert", "ng-show" => "#{notice}"}
+        %button.close{"data-dismiss" => "alert", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+          %span.sr-only Close
+        %strong= notice
+      .alert.alert-warning.alert-dismissible{:role => "alert", "ng-show" => "#{alert}"}
+        %button.close{"data-dismiss" => "alert", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+          %span.sr-only Close
+        %strong= alert
+    .container-fluid#site
+      .page
+        %nav.navHome
+          %button.btn.btn-default
+            %span.glyphicon.glyphicon-th-large
+
+        =yield
+        %footer
+
+      / /container
+

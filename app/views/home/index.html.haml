@@ -1,0 +1,11 @@
+#home
+  .col-md-6.col-md-offset-3
+    #index-info.col-md-12
+      .overlay
+        %h1
+          Planifica Viajes
+        %hr
+        %h2
+          Crea tus propias historias desde el principio
+        = link_to new_user_registration_path, :method => :get do
+          %button.btn.btn-danger.btn-lg= t("Register")

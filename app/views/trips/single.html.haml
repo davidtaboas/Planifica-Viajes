@@ -1,0 +1,121 @@
+#trip{"ng-controller" => "tripCtrl", "ng-init" => "trip = #{@trip}"}
+  %section#header{"data-speed" => "6", "data-type" => "background", "ng-style" => "tripBackground"}
+    %nav.settings
+      %button.btn.btn-default.visibility
+        %span.glyphicon.glyphicon-globe{"ng-show" => "trip.visibility == 'public'"}
+        %span.glyphicon.glyphicon-eye-open{"ng-show" => "trip.visibility == 'shared'"}
+        %span.glyphicon.glyphicon-eye-close{"ng-show" => "trip.visibility == 'private'"}
+    .container-fluid.header-info
+      %h1{"ng-model" => "trip.title"} {{trip.title}}
+  / Section 2
+  %section#map{"data-speed" => "4", "data-type" => "background", "ng-controller" => "mapCtrl"}
+    / #route
+    %script{:src => "http://maps.google.com/maps/api/js?libraries=places"}
+    %map#route{}
+      %marker{"ng-repeat" => "destination in destinations", "title" => "{{destination.name}}", "position" => "{{destination.coordinates}}", "z-index" => "4"}
+      %shape#polyline{:geodesic => "true", :name => "polyline", :path => "{{linea}}", "stroke-color" => "#647f46", "stroke-opacity" => "1.0", "stroke-weight" => "4"}
+    .panel{"style" => "display: block"}
+      %input#pac-input.controls{:placeholder => "Search Box", :type => "text", "style" => "display: none;"}/
+      %ul.list-group{}
+        %li.list-group-item{"ng-repeat" => "d in destinations"}
+          %span.glyphicon.glyphicon-align-justify
+          %span.badge {{$index+1}}
+          {{d.name}}
+    %button.show-panel{"style" => "display: none"}
+      %span.glyphicon.glyphicon-chevron-down
+    %button.hide-panel{"style" => "display: block"}
+      %span.glyphicon.glyphicon-chevron-up
+  / Section 3
+  %section#content{"data-speed" => "2", "data-type" => "background"}
+    .container-fluid
+      .dates
+        .row
+          .col-md-6
+            %h2
+              = t("StartDate")
+              %small {{ trip.startDate | date:'yyyy-MM-dd' }}
+          .col-md-6
+            %h2
+              = t("EndDate")
+              %small {{ trip.endDate | date:'yyyy-MM-dd' }}
+      .description
+        %h2
+          = t('Description')
+        .content{"ng-bind-html" => "trip.description", "ng-model" => "trip.description"}
+      %hr/
+      .budget{"ng-controller" => "budgetCtrl" }
+        %h2= t('Budget')
+        .row
+          .col-md-6
+            %h4= t('BudgetElements')
+            %table.table.table-hover
+              %thead
+                %tr
+                  %th= t('Item')
+                  %th= t('Units')
+                  %th= t('PriceUnit')
+                  %th= t('Cost')
+              %tbody
+                %tr{"ng-repeat" => "budget in budgets"}
+                  %td
+                    {{budget.description}}
+                    %span.label.label-danger{"ng-if" => "budget.category === 1"}= t('transport')
+                    %span.label.label-success{"ng-if" => "budget.category === 2"}= t('food')
+                    %span.label.label-primary{"ng-if" => "budget.category === 3"}= t('sleep')
+                    %span.label.label-warning{"ng-if" => "budget.category === 4"}= t('others')
+                  %td {{budget.units | number}}
+                  %td {{budget.priceperunit | currency:"€":2}}
+                  %td {{budget.units * budget.priceperunit | currency:"€":2}}
+                %tr
+                  %td TOTAL
+                  %td
+                  %td
+                  %td {{getTotal | currency:"€":2}}
+          .col-md-6
+            %highchart#chart1{:config => "highchartsNgConfig"}
+      %hr/
+      .extra
+        .row
+          .col-md-6{"ng-controller" => "stuffsCtrl" }
+
+
+            %header
+              %h3= t('Stuffs')
+            %section
+              %table.table.table-hover
+                %thead
+                  %tr
+                    %th #
+                    %th= t("Description")
+                %tbody
+                  %tr{"ng-repeat" => "stuff in stuffs", "class" => "done-{{stuff.status}}"}
+                    %td.status
+                      %input.glyphicon.glyphicon-ok{"type" => "checkbox", "ng-model"=>"stuff.status", "disabled"=>"disabled"}
+                    %td.text{}
+                      %span{}  {{stuff.description}}
+                      %button.destroy.glyphicon.glyphicon-remove{}
+            %footer{"style"=>"display: block;"}
+              .container-fluid
+                .todo-count
+                  {{remaining()}} {{itemText()}}
+
+
+          .col-md-6{"ng-controller" => "tasksCtrl"}
+            %header
+              %h3= t('ToDo')
+            %section
+              %table.table.table-hover
+                %thead
+                  %tr
+                    %th #
+                    %th= t("Description")
+                %tbody
+                  %tr{"ng-repeat" => "task in tasks", "class" => "done-{{task.status}}"}
+                    %td.status
+                      %input.glyphicon.glyphicon-ok{"type" => "checkbox", "ng-model"=>"task.status", "disabled"=>"disabled"}
+                    %td.text{}
+                      %span{}  {{task.description}}
+            %footer{"style"=>"display: block;"}
+              .container-fluid
+                .todo-count
+                  {{remaining()}} {{itemText()}}

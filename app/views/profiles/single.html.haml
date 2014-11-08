@@ -1,0 +1,18 @@
+%div#profile
+
+  %section.user-info
+    .info
+      %h1= @profile.username
+    - if current_user == @profile
+      .actions
+        %ul.list-inline
+          %li
+            =link_to t("NewTrip"), {controller: "trips", action: "create"}, :target => "_self"
+          %li
+            =link_to t("DeleteAccount"), {controller: "profiles", action: "delete"}, :target => "_self"
+  - @trips.each do |trip|
+    - if trip.visibility == "public" || current_user == @profile
+      %section{"style" => "background-image: url(#{trip.image.url})"}
+        .info
+          %h2
+            = link_to trip.title, {controller: "trips", action: "single", trip: trip.id}, :target => "_self"

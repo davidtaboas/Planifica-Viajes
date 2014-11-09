@@ -1,6 +1,6 @@
 {
   "name"        : "planificaviajes",
-  "version"     : "1.0.0",
+  "version"     : "0.10.21",
   "dependencies": {
     "bower": "1.3.5"
   }

@@ -34,3 +34,6 @@ pickle-email-*.html
 # Ignore compile assets
 public/assets/**
 public/uploads/**
+
+# Except assets manifest
+!/public/assets/manifest.yml

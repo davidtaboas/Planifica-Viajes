@@ -6,7 +6,6 @@
 # = require angular-resource
 # = require angular-sanitize
 # = require angular-devise
-# = require_tree ../templates
 # = require bootstrap-sprockets
 
 angular.module("PlanificaViajes.Trips", [])

@@ -13,7 +13,7 @@
 # = require 'ngmap'
 
 # = require 'trips.actions'
-app = angular.module("PlanificaViajes.Trips", ["ngSanitize", "highcharts-ng", "angularFileUpload", "ui.bootstrap.datetimepicker", "ngMap", "ui.sortable"])
+app = angular.module("PlanificaViajes.Trips", ["highcharts-ng", "angularFileUpload", "ui.bootstrap.datetimepicker", "ngMap", "ui.sortable"])
 
 
 app.controller "tripCtrl",

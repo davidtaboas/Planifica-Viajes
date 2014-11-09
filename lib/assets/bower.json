@@ -1,0 +1,22 @@
+{
+  "name": "dsl-generated dependencies",
+  "dependencies": {
+    "jquery-ui": "latest",
+    "angular": "latest",
+    "angular-route": "latest",
+    "angular-devise": "latest",
+    "angular-resource": "latest",
+    "angular-sanitize": "latest",
+    "highcharts": "latest",
+    "highcharts-ng": "latest",
+    "medium-editor": "latest",
+    "angular-file-upload": "latest",
+    "moment": "latest",
+    "angular-bootstrap-datetimepicker": "latest",
+    "angular-ui-sortable": "latest",
+    "ngmap": "latest"
+  },
+  "resolutions": {
+    "angular": "1.3.2"
+  }
+}

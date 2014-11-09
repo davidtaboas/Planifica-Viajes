@@ -8,11 +8,13 @@ gem 'rails', '4.1.7'
 # gem 'mysql2'
 gem 'pg'
 # Use SCSS for stylesheets
+gem 'sass', '3.2.19'
+gem 'compass', '~> 0.12.7'
 gem "sprockets", "2.11.0"
 gem 'sass-rails'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
-gem 'compass-rails'
+gem 'compass-rails', '~> 1.1.7'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views

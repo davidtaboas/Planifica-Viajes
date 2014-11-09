@@ -6,9 +6,6 @@ class ProfilesController < ApplicationController
     profile = User.find_for_authentication(:username => params[:username])
 
     @profile = profile
-    require "awesome_print"
-
-    ap current_user
     @trips = profile.trips
 
   end
@@ -18,8 +15,6 @@ class ProfilesController < ApplicationController
     @user = User.find_by(:username => params[:username])
     if current_user  === @user
       sign_out current_user
-      require "awesome_print"
-      ap @user
       @user.destroy
     end
 

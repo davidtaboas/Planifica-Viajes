@@ -31,5 +31,4 @@ pickle-email-*.html
 /lib/assets/bower_components*
 
 # Ignore compile assets
-public/assets/**
 public/uploads/**

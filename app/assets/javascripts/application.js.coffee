@@ -9,10 +9,16 @@
 
 # Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 # about supported directives.
-
-
-
-
+# = require jquery
+# = require jquery_ujs
+# = require turbolinks
+# = require angular
+# = require angular-route
+# = require angular-resource
+# = require angular-sanitize
+# = require angular-devise
+# = require bootstrap-sprockets
+# = require_tree .
 
 
 app = angular.module("PlanificaViajes", ["Devise", "PlanificaViajes.Trips"])

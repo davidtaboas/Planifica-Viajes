@@ -13,6 +13,48 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body{"ng-app" => "PlanificaViajes", "ng-controller" => "login as auth"}
+    :javascript
+      // Include the UserVoice JavaScript SDK (only needed once on a page)
+      UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/TDyAAYehMjw5dnfwBVA4kw.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+
+      //
+      // UserVoice Javascript SDK developer documentation:
+      // https://www.uservoice.com/o/javascript-sdk
+      //
+
+      // Set colors
+      UserVoice.push(['set', {
+        accent_color: '#6aba2e',
+        trigger_color: 'white',
+        trigger_background_color: '#6aba2e'
+      }]);
+
+      // Identify the user and pass traits
+      // To enable, replace sample data with actual user traits and uncomment the line
+      UserVoice.push(['identify', {
+        //email:      'john.doe@example.com', // User’s email address
+        //name:       'John Doe', // User’s real name
+        //created_at: 1364406966, // Unix timestamp for the date the user signed up
+        //id:         123, // Optional: Unique id of the user (if set, this should not change)
+        //type:       'Owner', // Optional: segment your users by type
+        //account: {
+        //  id:           123, // Optional: associate multiple users with a single account
+        //  name:         'Acme, Co.', // Account name
+        //  created_at:   1364406966, // Unix timestamp for the date the account was created
+        //  monthly_rate: 9.99, // Decimal; monthly rate of the account
+        //  ltv:          1495.00, // Decimal; lifetime value of the account
+        //  plan:         'Enhanced' // Plan name for the account
+        //}
+      }]);
+
+      // Add default trigger to the bottom-right corner of the window:
+      UserVoice.push(['addTrigger', { mode: 'smartvote', trigger_position: 'bottom-right' }]);
+
+      // Or, use your own custom trigger:
+      //UserVoice.push(['addTrigger', '#id', { mode: 'smartvote' }]);
+
+      // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
+      UserVoice.push(['autoprompt', {}]);
     %nav.siteNav
       .navbar.navbar-inverse.nomargin{:role => "navigation"}
 
@@ -30,11 +72,11 @@
 
                 %label.control-label{}= t("ErrorOnLogin")
 
-                %input.form-control{:placeholder => "Email", :type => "text", :name => "email", "ng-model" => "formInfo.email", "required" => ""}/
+                %input.form-control{:placeholder => t("username"), :type => "text", :name => "email", "ng-model" => "formInfo.email", "required" => ""}/
 
                 .clear
 
-                %input.form-control{:placeholder => "Password", :type => "password", :name => "password", "ng-model" => "formInfo.password", "required" => ""}/
+                %input.form-control{:placeholder => t("password"), :type => "password", :name => "password", "ng-model" => "formInfo.password", "required" => ""}/
 
                 %button.btn.btn-success{:type => "submit", "ng-click" => "login()"}= t('sign_in')
                 .clear

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'u/:username'                => 'profiles#single'
   get 'u/:username/delete'         => 'profiles#delete'
 
-  get 'u/:username/:trip'          => 'trips#single', :constraints => { :trip => /\d/ }
+  get 'u/:username/:trip'          => 'trips#single'
   get 'u/:username/new/trip'       => 'trips#create'
 
   # API

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   get 'api/t/:trip/budgets/'       => "api#getBudgets"
   post 'api/t/:trip/budgets/'      => "api#setBudgets"
+  post 'api/t/:trip/budgets/:id'   => "api#modBudgets"
   delete 'api/t/:trip/budgets/'    => "api#deleteBudgets"
 
   get 'api/t/:trip/dest'           => "api#getDest"

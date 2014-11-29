@@ -38,6 +38,7 @@ class ApiController < ApplicationController
 
       item = Item.find(params[:id])
       item.status = params[:status]
+      item.description = params[:description]
       item.save!
       head :ok
 
@@ -75,6 +76,17 @@ class ApiController < ApplicationController
     # render status: 200
     head :ok
 
+  end
+
+  def modBudgets
+    budget = Budget.find(params[:id])
+    budget.units        = request["units"]
+    budget.priceperunit = request["priceperunit"]
+    budget.category     = request["category"]
+    budget.date         = Time.now
+    budget.description  = request["description"]
+    budget.save!
+    head :ok
   end
 
   def deleteBudgets

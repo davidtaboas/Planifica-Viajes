@@ -19,6 +19,7 @@ app = angular.module("PlanificaViajes.Trips", ["ngSanitize", "highcharts-ng", "a
 app.controller "tripCtrl",
   ($scope, $http, FileUploader,$filter) ->
 
+
     $scope.trip = {}
     $scope.tripBackground = {}
     $scope.sharedUrl = ""
@@ -119,6 +120,7 @@ app.controller "tripCtrl",
       info = {
         title: $(".header-info h1").text()
       }
+      window.document.title = info.title
       $http.post("/api/t/"+$scope.trip.id+"/data/", info).success (data)->
         $(".save-title").animate
           opacity: 0
@@ -436,6 +438,7 @@ app.controller "budgetCtrl",
     getBudgets = ->
       $http.get("/api/t/"+$scope.trip.id+"/budgets/").success (data) ->
         $scope.budgets = data
+        console.log data
         return
 
       return
@@ -453,6 +456,7 @@ app.controller "budgetCtrl",
         priceperunit: item.priceperunit
       }
 
+
       $http.post("/api/t/"+$scope.trip.id+"/budgets/", budget).success (data) ->
         getBudgets()
         $scope.newbudget = []
@@ -469,6 +473,26 @@ app.controller "budgetCtrl",
         return
       return
 
+    $scope.modBudget = (item) ->
+      $scope.toggleEditMode(item)
+      modbudget = {
+        description: item.description
+        category: item.category
+        units: item.units
+        priceperunit: item.priceperunit
+      }
+      $http.post("/api/t/"+$scope.trip.id+"/budgets/"+item.id, modbudget).success (data) ->
+
+        return
+      return
+
+    $scope.toggleEditMode = (budget)->
+      if budget.editing is true
+        budget.editing = false
+      else
+        budget.editing = true
+
+      return
     $scope.highchartsNgConfig =
       options:
         chart:
@@ -574,6 +598,11 @@ app.controller "stuffsCtrl",
 
       return
 
+    modStuff = (todo) ->
+      $scope.toggleEditMode(todo)
+      $http.post("/api/t/"+$scope.trip.id+"/items/stuff/", todo).success (data) ->
+        return
+      return
     $scope.isStuff = ->
       $scope.stuffs.length > 0
 
@@ -586,7 +615,8 @@ app.controller "stuffsCtrl",
       return
 
     $scope.editOnEnter = (todo) ->
-      $scope.toggleEditMode(todo)  if event.keyCode is 13 and todo.description
+
+      modStuff(todo)  if (event.keyCode is 13 or event.type is "click") and todo.description
       return
 
     $scope.changeStatus = (todo) ->
@@ -683,6 +713,12 @@ app.controller "tasksCtrl",
 
       return
 
+    modTask = (todo) ->
+      $scope.toggleEditMode(todo)
+      $http.post("/api/t/"+$scope.trip.id+"/items/task/", todo).success (data) ->
+        return
+      return
+
     $scope.isTask = ->
       $scope.tasks.length > 0
 
@@ -695,7 +731,8 @@ app.controller "tasksCtrl",
       return
 
     $scope.editOnEnter = (todo) ->
-      $scope.toggleEditMode(todo)  if event.keyCode is 13 and todo.description
+
+       modTask(todo) if (event.keyCode is 13 or event.type is "click") and todo.description
       return
 
     $scope.changeStatus = (todo) ->

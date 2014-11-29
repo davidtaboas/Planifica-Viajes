@@ -7,6 +7,7 @@ class TripsController < ApplicationController
     profile = User.find_for_authentication(:username => params[:username])
     trip = Trip.find(params[:trip])
 
+    @title = trip.title
     if can_edit(profile)
       @trip = trip.to_json
       render "trips/edit"

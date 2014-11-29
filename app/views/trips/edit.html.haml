@@ -107,17 +107,36 @@
                   %th
               %tbody
                 %tr{"ng-repeat" => "budget in budgets"}
-                  %td
-                    {{budget.description}}
-                    %span.label.label-danger{"ng-if" => "budget.category === 1"}= t('transport')
-                    %span.label.label-success{"ng-if" => "budget.category === 2"}= t('food')
-                    %span.label.label-primary{"ng-if" => "budget.category === 3"}= t('sleep')
-                    %span.label.label-warning{"ng-if" => "budget.category === 4"}= t('others')
-                  %td {{budget.units | number}}
-                  %td {{budget.priceperunit | currency:"€":2}}
-                  %td {{budget.units * budget.priceperunit | currency:"€":2}}
-                  %td
-                    %button.destroy.glyphicon.glyphicon-remove{"ng-click" => "removeBudget(budget)"}
+
+                  %div
+                    %td
+                      %div{"ng-hide" => "budget.editing"}
+                        {{budget.description}}
+                        %span.label.label-danger{"ng-if" => "budget.category === 1"}= t('transport')
+                        %span.label.label-success{"ng-if" => "budget.category === 2"}= t('food')
+                        %span.label.label-primary{"ng-if" => "budget.category === 3"}= t('sleep')
+                        %span.label.label-warning{"ng-if" => "budget.category === 4"}= t('others')
+                      %div{"ng-show" => "budget.editing"}
+                        %input.title{"type" => "text", "ng-model" => "budget.description"}/
+                        %select.cat{"ng-model" => "budget.category", "ng-options"=>"category.id as category.name for category in categories"}
+                    %td
+                      %div{"ng-hide" => "budget.editing"}
+                        {{budget.units | number}}
+                      %div{"ng-show" => "budget.editing"}
+                        %input.units{"type" => "number", "size" => "2", "value" => "0", "ng-model" => "budget.units"}/
+                    %td
+                      %div{"ng-hide" => "budget.editing"}
+                        {{budget.priceperunit | currency:"€":2}}
+                      %div{"ng-show" => "budget.editing"}
+                        %input.price{"type" => "number", "step" => "0.50", "value" => "0", "ng-model" => "budget.priceperunit"}/
+
+                    %td {{budget.units * budget.priceperunit | currency:"€":2}}
+                    %td
+                      %span{"ng-hide" => "budget.editing"}
+                        %button.mod.glyphicon.glyphicon-pencil{"ng-click" => "toggleEditMode(budget)"}
+                      %span{"ng-show" => "budget.editing"}
+                        %button.mod.glyphicon.glyphicon-floppy-disk{"ng-click" => "modBudget(budget)"}
+                      %button.destroy.glyphicon.glyphicon-remove{"ng-click" => "removeBudget(budget)"}
                 %tr
                   %td
                     %input.title{"type" => "text", "ng-model" => "newbudget.description"}/
@@ -159,12 +178,17 @@
                     %td.text
                       %input#new{"ng-keyup" => "addStuff()", "ng-model" => "stuffText", :placeholder => t("WhatStuff"), :size => "30", :type => "text"}/
                 %tbody
-                  %tr{"ng-repeat" => "stuff in stuffs", "class" => "done-{{stuff.status}}"}
+                  %tr{"ng-repeat" => "stuff in stuffs.slice().reverse()", "class" => "done-{{stuff.status}}"}
                     %td.status
                       %input.glyphicon.glyphicon-ok{"type" => "checkbox", "ng-model"=>"stuff.status", "ng-click" => "changeStatus(stuff)"}
                     %td.text{"ng-keyup"=>"editTodo()"}
                       %span{"ng-dblclick" => "toggleEditMode(stuff)", "ng-hide" => "stuff.editing"}  {{stuff.description}}
                       %input{:autofocus => "", "ng-keyup" => "editOnEnter(stuff)", "ng-model" => "stuff.description", "ng-show" => "stuff.editing"}/
+
+
+                      %button.mod.glyphicon.glyphicon-pencil{"ng-click" => "toggleEditMode(stuff)", "ng-hide" => "stuff.editing"}
+                      %button.mod.glyphicon.glyphicon-floppy-disk{"ng-click" => "editOnEnter(stuff)","ng-show" => "stuff.editing"}
+
                       %button.destroy.glyphicon.glyphicon-remove{"ng-click" => "removeItem(stuff)"}
             %footer{"style"=>"display: block;"}
               .container-fluid
@@ -190,12 +214,17 @@
                     %td.text
                       %input#new{"ng-keyup" => "addTask()", "ng-model" => "taskText", :placeholder => t("WhatTask"), :size => "30", :type => "text"}/
                 %tbody
-                  %tr{"ng-repeat" => "task in tasks", "class" => "done-{{task.status}}"}
+                  %tr{"ng-repeat" => "task in tasks.slice().reverse()", "class" => "done-{{task.status}}"}
                     %td.status
                       %input.glyphicon.glyphicon-ok{"type" => "checkbox", "ng-model"=>"task.status", "ng-click" => "changeStatus(task)"}
                     %td.text{"ng-keyup"=>"editTodo()"}
                       %span{"ng-dblclick" => "toggleEditMode(task)", "ng-hide" => "task.editing"}  {{task.description}}
                       %input{:autofocus => "", "ng-keyup" => "editOnEnter(task)", "ng-model" => "task.description", "ng-show" => "task.editing"}/
+
+                      %button.mod.glyphicon.glyphicon-pencil{"ng-click" => "toggleEditMode(task)", "ng-hide" => "task.editing"}
+                      %button.mod.glyphicon.glyphicon-floppy-disk{"ng-click" => "editOnEnter(task)","ng-show" => "task.editing"}
+
+
                       %button.destroy.glyphicon.glyphicon-remove{"ng-click" => "removeItem(task)"}
             %footer{"style"=>"display: block;"}
               .container-fluid

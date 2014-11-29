@@ -36,6 +36,8 @@ gem 'angular_rails_csrf'
 gem 'carrierwave'
 gem "i18n-js"
 gem 'bower-rails'
+gem 'figaro'
+gem "fog"
 
 group :development do
   gem 'guard'

@@ -32,3 +32,5 @@ pickle-email-*.html
 
 # Ignore compile assets
 public/uploads/**
+# Ignore application configuration
+/config/application.yml

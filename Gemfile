@@ -38,6 +38,7 @@ gem "i18n-js"
 gem 'bower-rails'
 gem 'figaro'
 gem "fog"
+gem "pismo"
 
 group :development do
   gem 'guard'

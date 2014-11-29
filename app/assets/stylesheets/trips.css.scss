@@ -342,13 +342,15 @@
             td{
 
               &.status {
-
+                width: 40px;
               }
 
               &.text{
                 padding-left: 10px;
                 position: relative;
-
+                input.edit{
+                  width: 85%;
+                }
                 .destroy, .mod{
                   outline: none;
                   background: none;

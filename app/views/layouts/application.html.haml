@@ -1,7 +1,7 @@
 !!! 5
 %html
   %head
-    %title= @title
+    %title= @title || "Planifica Viajes"
     = stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true
 
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
@@ -81,11 +81,20 @@
                   = link_to t("Register"), new_user_registration_path
 
             %div.login-true{"ng-show" => "is_login()"}
-              %h4
-                %span.glyphicon.glyphicon-user
-                %a.navbar-link{:href => "/u/{{username}}", "target" => "_self"} {{username}}
+              .list-group
+                %li.list-group-item.active
+                  %span.glyphicon.glyphicon-user
+                  {{username}}
+                =link_to edit_user_registration_path, :class => "list-group-item", :target => "_self" do
+                  %span.glyphicon.glyphicon-wrench
+                  = t("YourAccount")
+                %a.list-group-item{:href => "/u/{{username}}", "target" => "_self"}
+                  %span.glyphicon.glyphicon-align-justify
+                  = t('AllYourTrips')
+
+              %div.clear
               %button.btn.btn-success{:type => "submit", "ng-click" => "logout()"}
-                %span.glyphicon.glyphicon-plane
+                %span.glyphicon.glyphicon-off
                 = t('log_out')
 
 
@@ -107,7 +116,7 @@
       .page
         %nav.navHome
           %button.btn.btn-default
-            %span.glyphicon.glyphicon-th-large
+            %span.glyphicon.glyphicon-home
 
         =yield
         %footer

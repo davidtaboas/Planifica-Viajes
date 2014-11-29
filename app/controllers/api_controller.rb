@@ -23,6 +23,17 @@ class ApiController < ApplicationController
 
     trip = Trip.find(params[:trip])
 
+    description = request["description"]
+
+
+    if is_link(description)
+      require 'pismo'
+      doc = Pismo::Document.new(description)
+      finalDescription = "<a href='#{description}'>#{doc.title}</a>"
+    else
+      finalDescription = description
+    end
+
     if params[:id].nil?
       if params[:type] == "stuff"
         cat = "material"
@@ -30,15 +41,15 @@ class ApiController < ApplicationController
         cat = "todo"
       end
 
-      stuff = trip.items.create(description: request["description"], status: false, cat: cat,date: Time.now)
 
+      stuff = trip.items.create(description: finalDescription, status: false, cat: cat,date: Time.now)
       # render status: 200
       head :ok
     else
 
       item = Item.find(params[:id])
       item.status = params[:status]
-      item.description = params[:description]
+      item.description = finalDescription
       item.save!
       head :ok
 
@@ -165,6 +176,16 @@ class ApiController < ApplicationController
 
     head :ok
 
+  end
+
+  private
+
+  def is_link(link)
+    if /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix.match(link)
+      return true
+    else
+      return false
+    end
   end
 
 

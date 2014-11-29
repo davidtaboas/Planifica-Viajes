@@ -601,6 +601,7 @@ app.controller "stuffsCtrl",
     modStuff = (todo) ->
       $scope.toggleEditMode(todo)
       $http.post("/api/t/"+$scope.trip.id+"/items/stuff/", todo).success (data) ->
+        getStuffs()
         return
       return
     $scope.isStuff = ->
@@ -716,6 +717,7 @@ app.controller "tasksCtrl",
     modTask = (todo) ->
       $scope.toggleEditMode(todo)
       $http.post("/api/t/"+$scope.trip.id+"/items/task/", todo).success (data) ->
+        getTasks()
         return
       return
 
@@ -731,8 +733,7 @@ app.controller "tasksCtrl",
       return
 
     $scope.editOnEnter = (todo) ->
-
-       modTask(todo) if (event.keyCode is 13 or event.type is "click") and todo.description
+      modTask(todo) if (event.keyCode is 13 or event.type is "click") and todo.description
       return
 
     $scope.changeStatus = (todo) ->
@@ -775,6 +776,7 @@ app.controller "tasksCtrl",
         $scope.tasks.splice(index, 1)
         return
       return
+
     $scope.clear = ->
 
       angular.forEach $scope.tasks, (todo) ->

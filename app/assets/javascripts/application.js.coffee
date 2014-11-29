@@ -9,6 +9,8 @@
 
 # Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 # about supported directives.
+# = require i18n
+# = require i18n/translations
 # = require jquery
 # = require jquery_ujs
 # = require turbolinks
@@ -29,7 +31,7 @@ app.config (AuthProvider) ->
   AuthProvider.loginPath "/auth/login.json"
   AuthProvider.logoutPath "/auth/logout.json"
   AuthProvider.registerPath "/auth/register/new.json"
-  AuthProvider.ignoreAuth true
+  AuthProvider.interceptAuth true
 
 
 

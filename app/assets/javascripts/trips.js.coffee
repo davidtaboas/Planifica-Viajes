@@ -27,7 +27,7 @@ app.controller "tripCtrl",
 
     $scope.$watch "trip", (->
       $scope.tripBackground = {'background-image':'url('+$scope.trip.image.url+')'}
-      $scope.sharedUrl = location.href+"?key="+$scope.trip.key
+      $scope.sharedUrl = location.href
     ), true
 
     uploader = $scope.uploader = new FileUploader(

@@ -2,65 +2,90 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$gris: rgba(0,0,0,0.8);
+
 #profile{
 
 
   section{
     width: 100%;
-    height: 25vh;
     display: table;
     background-position: 50% 0;
     background-size: cover;
-    background-color: #333;
+    position: relative;
+
     &.user-info{
-      background-color: #333;
+      height: 25vh;
     }
 
-    .info, .actions {
-      display: table-cell;
-      vertical-align: middle;
-      float: left;
-      width: 100%;
-      clear: both;
+    &.trip{
+      padding: 20px 0;
+      /* float: left; */
+      height: 190px;
+    }
 
-      h1, h2{
-        font-family: 'Lato';
-        font-size: 5em;
-        text-align: center;
-        color: #fff;
 
-        a {
-          color: #fff;
-          text-shadow: 0px 2px #999;
+    h1, h2, h3{
+      font-family: "lato";
+      letter-spacing: -0.02em;
+      font-style: normal;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: $gris;
+      margin-bottom: 8px;
+      outline: 0;
+      word-break: break-word;
+      word-wrap: break-word;
 
-          &:hover{
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 130%;
-          }
-          &:active{
-            text-decoration: none;
-          }
+      a {
+        color: $gris;
+
+        &:hover{
+
+        }
+        &:active{
+
         }
       }
     }
+    h1 {
+      font-size: 50px;
+      text-align: center;
+      font-weight: 700;
+    }
+    h3 {
+      font-size: 24px;
+      font-weight: 300;
+    }
 
-    .actions{
-      background: #efefef;
-      opacity: 0.6;
-      padding: 10px;
-      font-size: 20px;
-      font-weight: bold;
-      line-height: 20px !important;
-      width: 60%;
-      margin: 0 auto;
+    .info,
+    .image{
+      float: left;
+    }
+
+    .image {
       display: block;
-      float: none;
-      border-radius: 6px;
-      ul {
-        text-align: center;
+      width: 242px;
+      height: 150px;
+      position: absolute;
+      float: left;
+    }
+    .info {
+      margin-left: 250px;
+
+      h3{
+        margin-top: 0px;
+      }
+      .description{
+        font-family: "Raleway",Georgia,Cambria,"Times New Roman",Times,serif;
+        letter-spacing: 0.01rem;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 18px;
+        line-height: 1.5;
       }
     }
+
 
   }
 }

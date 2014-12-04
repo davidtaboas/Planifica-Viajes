@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
+  Title: "Planifica Viajes"
   # AUTH
   sign_in: "Entrar"
   log_out: "Salir"
@@ -71,6 +72,10 @@ es:
   WhatTask: "¿Qué tarea debes realizar?"
   WhatStuff: "¿Qué material necesitas?"
   ErrorOnLogin: "eMail y/o contraseña incorrecta/s"
+
+  time:
+    formats:
+      trip: "%d/%m/%Y"
 
   devise:
     confirmations:

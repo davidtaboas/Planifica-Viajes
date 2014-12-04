@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   respond_to :html, :json
   before_action :set_locale
+  before_action :set_metatags
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :export_i18n_messages
 
@@ -10,17 +11,28 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
 
+  def set_metatags
+
+    set_meta_tags :site => t("Title"),
+                  :reverse => true,
+                  :description => 'Member login page.',
+                  :keywords => 'Site, Login, Members',
+                  :canonical => "http://yoursite.com/canonical/url",
+                  :alternate => { "fr" => "http://yoursite.fr/alternate/url",
+                                  "de" => "http://yoursite.de/alternate/url" }
+  end
+
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+    I18n.locale = extract_locale_from_tld || I18n.default_locale
   end
 
   def export_i18n_messages
     SimplesIdeias::I18n.export! if Rails.env.development?
   end
 
-  def default_url_options(options={})
-    logger.debug "default_url_options is passed options: #{options.inspect}\n"
-    { locale: I18n.locale }
+  def extract_locale_from_tld
+    parsed_locale = request.host.split('.').last
+    I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
   end
 
   protected

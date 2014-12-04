@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  Title: "Planning"
   sign_in: "Sign in"
   log_out: "Logout"
   signed_as: "Signed as"

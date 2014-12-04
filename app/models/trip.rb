@@ -8,7 +8,8 @@ class Trip < ActiveRecord::Base
   after_initialize :init
   def init
     o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
-    string = (0...50).map { o[rand(o.length)] }.join
+    string = (0...5).map { o[rand(o.length)] }.join
+    #comprobar que key no existe
 
     self.title ||= "Trip"
     self.description ||= "<p>Type a nice description...</p>"

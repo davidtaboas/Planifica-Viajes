@@ -6,10 +6,11 @@ Rails.application.routes.draw do
 
   # get '/' => 'home#index'
 
-  get 'u/:username'                => 'profiles#single'
+
+  get 'u/:username'                => 'profiles#single', as: 'profile'
   get 'u/:username/delete'         => 'profiles#delete'
 
-  get 'u/:username/:trip'          => 'trips#single'
+  get 't/:trip'                    => 'trips#single', as: 'trip'
   get 'u/:username/new/trip'       => 'trips#create'
 
   # API

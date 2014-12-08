@@ -99,7 +99,15 @@ app.controller "tripCtrl",
         return
       return
 
+    $scope.toggleFavorite = () ->
+      $scope.favorite = !$scope.favorite
+      info = {
+        fav: $scope.favorite
+      }
+      $http.post("/api/t/"+$scope.trip.id+"/data/", info).success (data)->
 
+        return
+      return
     $scope.saveDescription = ()->
 
       info = {

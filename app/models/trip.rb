@@ -1,5 +1,9 @@
 class Trip < ActiveRecord::Base
+  # Administración de roles
   resourcify
+
+  # Gestión de favoritos
+  markable_as :favorite
 
   belongs_to :user
   has_many :budgets, dependent: :destroy

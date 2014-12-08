@@ -8,6 +8,7 @@ class ProfilesController < ApplicationController
     set_meta_tags :title =>  profile.username
     @profile = profile
     @trips = profile.trips
+    @favorites = profile.trips_marked_as :favorite
 
   end
 

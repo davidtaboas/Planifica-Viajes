@@ -20,6 +20,11 @@
           %button.btn.btn-danger.cancel= t("Cancel")
   %section#header{"data-speed" => "6", "data-type" => "background", "ng-style" => "tripBackground"}
     %nav.settings
+      - if current_user
+        %button.btn.btn-default.favorite{"ng-init" => "favorite = #{@favorite}", "ng-click" => "toggleFavorite()"}
+
+          %span.glyphicon.glyphicon-heart{"ng-show" => "favorite"}
+          %span.glyphicon.glyphicon-heart-empty{"ng-hide" => "favorite"}
       %button.btn.btn-default.visibility
         %span.glyphicon.glyphicon-globe{"ng-show" => "trip.visibility == 'public'"}
         %span.glyphicon.glyphicon-eye-open{"ng-show" => "trip.visibility == 'shared'"}

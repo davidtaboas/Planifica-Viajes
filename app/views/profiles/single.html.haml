@@ -52,5 +52,37 @@
   %div.clearfix
   %div.line
     %a.line-name
-      = t("Favourites")
-  %div.col-md-8.col-md-offset-2
+      = t("Favorites")
+  - if current_user == @profile
+    %div.col-md-8.col-md-offset-2
+      - @favorites.each do |favorite|
+
+        %section.favorite
+          %a.image
+            %img{"src" => "#{favorite.image.thumb.url}", "width" => "242", "height" => "150"}
+          .info
+            %h3
+              = link_to favorite.title, {controller: "trips", action: "single", trip: favorite.key}, :target => "_self"
+            %p.description
+              = truncate( strip_tags(favorite.description), length: 140)
+            %div.tripMeta
+
+              %span.author
+                - author = favorite.author_by_name
+                =link_to author, profile_path(author)
+              %div.dates
+                - if favorite.startDate
+                  %span.start
+                    %span.glyphicon.glyphicon-calendar
+                    %strong
+                      = t("StartDate")
+                    = l(favorite.startDate, :format => :trip)
+                - if favorite.endDate
+                  %span.end
+                    %span.glyphicon.glyphicon-calendar
+                    %strong
+                      = t("EndDate")
+
+                    = l(favorite.endDate, :format => :trip)
+    %div.clearfix
+    %div.line

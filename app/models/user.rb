@@ -1,7 +1,10 @@
 class User < ActiveRecord::Base
+  # Utilización de roles para administrar viajes
   rolify
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+
+  # Uso como parte activa para hacer favoritos
+  acts_as_marker
+
 
   has_many :trips, :dependent => :destroy
 

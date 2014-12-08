@@ -37,13 +37,22 @@ gem 'devise'
 gem 'cancancan'
 gem 'rolify'
 
+
+gem 'markable', github: 'chrome/markable'
+
+
 gem 'angular_rails_csrf'
+
 gem 'carrierwave'
 gem 'mini_magick'
+
 gem "i18n-js"
+
 gem 'bower-rails'
+
 gem 'figaro'
 gem "fog"
+
 gem "pismo"
 gem 'meta-tags'
 

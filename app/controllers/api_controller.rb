@@ -29,7 +29,7 @@ class ApiController < ApplicationController
     if is_link(description)
       require 'pismo'
       doc = Pismo::Document.new(description)
-      finalDescription = "<a href='#{description}'>#{doc.title}</a>"
+      finalDescription = "<a href='#{description}'><span class='glyphicon glyphicon-link'></span> #{doc.title}</a>"
     else
       finalDescription = description
     end
@@ -154,6 +154,15 @@ class ApiController < ApplicationController
 
     if request["endDate"].presence
       trip.endDate = request["endDate"]
+    end
+
+    if !request["fav"].nil?
+      ap request["fav"]
+      if trip.marked_as? :favorite, :by => current_user
+        trip.unmark :favorite, :by => current_user
+      else
+        current_user.mark_as_favorite trip
+      end
     end
     trip.save!
     head :ok

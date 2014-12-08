@@ -7,6 +7,42 @@ $gris: rgba(0,0,0,0.8);
 #profile{
 
 
+  .line{
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 12px;
+      width: 100%;
+      border-top: 1px solid rgba(0,0,0,0.15);
+    }
+
+    position: relative;
+    text-align: center;
+    line-height: 1.2;
+    margin: 20px 0 10px;
+
+    .line-name{
+      display: inline-block;
+      border: 1px solid rgba(0,0,0,0.44);
+      background: #fff;
+      text-transform: uppercase;
+      font-size: 12px;
+      padding: 3px 8px 2px 12px;
+      letter-spacing: .3em;
+      color: rgba(0,0,0,0.6);
+      position: relative;
+    }
+  }
+  h4{
+    font-family: "Lato";
+    color: $gris;
+    border: 1px solid $gris;
+    padding: 2px;
+    text-align: center;
+  }
+
   section{
     width: 100%;
     display: table;
@@ -53,10 +89,14 @@ $gris: rgba(0,0,0,0.8);
       text-align: center;
       font-weight: 700;
     }
+
     h3 {
       font-size: 24px;
       font-weight: 300;
     }
+
+
+
 
     .info,
     .image{
@@ -69,6 +109,25 @@ $gris: rgba(0,0,0,0.8);
       height: 150px;
       position: absolute;
       float: left;
+    }
+    .actions{
+      margin: 20px 0;
+
+      text-align: right;
+      li{
+        padding-right: 0px;
+      }
+
+      .new{
+        &:hover{
+          @extend .btn-primary;
+        }
+      }
+      .delete{
+        &:hover{
+          @extend .btn-danger;
+        }
+      }
     }
     .info {
       margin-left: 250px;
@@ -84,8 +143,30 @@ $gris: rgba(0,0,0,0.8);
         font-size: 18px;
         line-height: 1.5;
       }
+      .tripMeta{
+
+        font-size: 14px;
+
+
+        .author{
+
+          a {
+            &:before{
+              content: "@";
+            }
+            font-weight: bold;
+
+          }
+
+        }
+        .dates{
+          margin-left: 10px;
+          display: inline;
+        }
+      }
     }
 
 
   }
+
 }

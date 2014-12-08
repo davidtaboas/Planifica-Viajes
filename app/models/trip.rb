@@ -16,4 +16,10 @@ class Trip < ActiveRecord::Base
     self.visibility ||= "private"
     self.key ||= string
   end
+
+  def author_by_name
+    require "awesome_print"
+    user = User.find(self.user_id)
+    return user.username
+  end
 end

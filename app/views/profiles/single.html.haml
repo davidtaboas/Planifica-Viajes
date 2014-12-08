@@ -2,18 +2,20 @@
 
   %div.col-md-8.col-md-offset-2
     %section.user-info
-
-      %h1= @profile.username
       - if current_user == @profile
         .actions
           %ul.list-inline
             %li
-              =link_to t("NewTrip"), {controller: "trips", action: "create"}, :target => "_self"
+              =button_to t("NewTrip"), {controller: "trips", action: "create"}, :target => "_self", :class => "btn btn-default new"
             %li
-              =link_to t("DeleteAccount"), {controller: "profiles", action: "delete"}, :target => "_self"
+              =button_to t("DeleteAccount"), {controller: "profiles", action: "delete"}, :target => "_self", :class => "btn btn-default delete"
+      %h1= @profile.username
   %div.clearfix
-  %hr
+  %div.line
+    %a.line-name
+      = t("Latest")
   %div.col-md-8.col-md-offset-2
+
     - @trips.each do |trip|
       - if trip.visibility == "public" || current_user == @profile
         %section.trip
@@ -25,15 +27,28 @@
             %p.description
               = truncate( strip_tags(trip.description), length: 140)
             %div.tripMeta
+
               %span.author
-                =link_to "David Táboas", profile_path("davidtaboas")
-              - if trip.startDate
-                %span.start
-                  = t("StartDate")
-                  = l(trip.startDate, :format => :trip)
-              - if trip.startDate
-                %span.end
-                  = t("EndDate")
-                  = l(trip.endDate, :format => :trip)
+                - author = trip.author_by_name
+                =link_to author, profile_path(author)
+              %div.dates
+                - if trip.startDate
+                  %span.start
+                    %span.glyphicon.glyphicon-calendar
+                    %strong
+                      = t("StartDate")
+                    = l(trip.startDate, :format => :trip)
+                - if trip.endDate
+                  %span.end
+                    %span.glyphicon.glyphicon-calendar
+                    %strong
+                      = t("EndDate")
+
+                    = l(trip.endDate, :format => :trip)
 
       %hr
+  %div.clearfix
+  %div.line
+    %a.line-name
+      = t("Favourites")
+  %div.col-md-8.col-md-offset-2

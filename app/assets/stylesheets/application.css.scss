@@ -10,12 +10,31 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
  *= require_self
  */
+
+$link-color: rgba(0,0,0,0.6);
+$link-hover-color: rgba(0,0,0,0.8);
 @import "compass";
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+@import "home";
+@import "profiles";
+@import "trips";
+
+
+
+// Usage
+a {
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: underline;
+  }
+}
 
 nav.siteNav {
   position: fixed;

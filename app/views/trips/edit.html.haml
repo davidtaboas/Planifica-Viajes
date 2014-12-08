@@ -27,8 +27,9 @@
 
       %button.btn.btn-default.change-image
         %span.glyphicon.glyphicon-picture{}
-      %button.btn.btn-default.delete-trip{"data-target" => "#modal-delete-trip", "data-toggle" => "modal", :type => "button"}
-        %span.glyphicon.glyphicon-remove
+      - if can? :destroy, Trip
+        %button.btn.btn-default.delete-trip{"data-target" => "#modal-delete-trip", "data-toggle" => "modal", :type => "button"}
+          %span.glyphicon.glyphicon-remove
       .clear
       %form{"role"=>"form"}
         %input.form-control.sharedkey{"type"=>"text", "ng-show" => "trip.visibility == 'shared'", "value" => "{{sharedUrl}}", "onClick"=>"this.select();"}

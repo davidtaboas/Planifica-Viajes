@@ -6,9 +6,9 @@
         .actions
           %ul.list-inline
             %li
-              =button_to t("NewTrip"), {controller: "trips", action: "create"}, :target => "_self", :class => "btn btn-default new"
+              =button_to t("NewTrip"), {controller: "trips", action: "create"}, :target => "_self", :class => "btn btn-default new", :method => :get
             %li
-              =button_to t("DeleteAccount"), {controller: "profiles", action: "delete"}, :target => "_self", :class => "btn btn-default delete"
+              =button_to t("DeleteAccount"), {controller: "profiles", action: "delete"}, :target => "_self", :class => "btn btn-default delete", :method => :delete
       %h1= @profile.username
   %div.clearfix
   %div.line
@@ -17,6 +17,8 @@
   %div.col-md-8.col-md-offset-2
 
     - @trips.each do |trip|
+      - current_user.has_role? :admin, trip
+
       - if trip.visibility == "public" || current_user == @profile
         %section.trip
           %a.image

@@ -10,9 +10,9 @@ class TripsController < ApplicationController
     set_meta_tags :title => trip.title
 
     @trip = trip.to_json
-    if can_edit(trip)
+    if can? :write, trip
       render "trips/edit"
-    elsif can_view(trip)
+    elsif can? :read, trip
 
       render "trips/single"
     else
@@ -28,26 +28,5 @@ class TripsController < ApplicationController
     redirect_to trip_url(trip.key)
   end
 
-  private
-  def can_view(trip)
-
-    if trip.visibility === "public" || trip.visibility === "shared"
-      return true
-    else
-      return false
-    end
-
-  end
-
-  def can_edit(trip)
-
-
-    if trip.user_id === current_user.id
-      return true
-    else
-      return false
-    end
-
-  end
 
 end

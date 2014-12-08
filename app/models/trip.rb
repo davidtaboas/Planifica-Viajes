@@ -1,4 +1,6 @@
 class Trip < ActiveRecord::Base
+  resourcify
+
   belongs_to :user
   has_many :budgets, dependent: :destroy
   has_many :items, dependent: :destroy
@@ -15,6 +17,7 @@ class Trip < ActiveRecord::Base
     self.description ||= "<p>Type a nice description...</p>"
     self.visibility ||= "private"
     self.key ||= string
+    self.user.add_role :admin, self
   end
 
   def author_by_name

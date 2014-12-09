@@ -166,3 +166,17 @@ nav.siteNav {
     transition-duration: 250ms;
   }
 }
+
+footer#end{
+  height: 50px;
+  display: block;
+}
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}

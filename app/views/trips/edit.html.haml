@@ -58,7 +58,7 @@
           %span.glyphicon.glyphicon-remove
       .clear
       %form{"role"=>"form"}
-        %input.form-control.sharedkey{"type"=>"text", "ng-show" => "trip.visibility == 'shared'", "value" => "{{sharedUrl}}", "onClick"=>"this.select();"}
+        %input.form-control.sharedkey{"type"=>"text", "ng-show" => "trip.visibility == 'shared'", "value" => "{{sharedUrl}}", "onClick"=>"this.select();", "ng-cloak" => "", "class"=>"ng-cloak"}
     #sharedpreferences.popover.fade.left.in{:role => "tooltip"}
       .arrow{:style => "top: 10%;"}
       %h3.popover-title= t("SharedPreferences")
@@ -74,7 +74,7 @@
             %span.glyphicon.glyphicon-globe
             = t("Public")
     .container-fluid.header-info
-      %h1.editable{"ng-model" => "trip.title"} {{trip.title}}
+      %h1.editable{"ng-model" => "trip.title", "ng-cloak" => "", "class"=>"ng-cloak"} {{trip.title}}
       %button.btn.btn-success.save-title{"type" => "button", "ng-click" => "saveTitle()"}= t("Save")
   / Section 2
   %section#map{"data-speed" => "4", "data-type" => "background", "ng-controller" => "mapCtrl"}
@@ -105,12 +105,12 @@
           .col-md-6
             %h2
               = t("StartDate")
-              %small {{ trip.startDate | date:'yyyy-MM-dd' }}
+              %small{"ng-cloak" => "", "class"=>"ng-cloak"} {{ trip.startDate | date:'yyyy-MM-dd' }}
             %datetimepicker{"data-datetimepicker-config" => "{ startView:'day', minView:'day' }", "data-ng-model" => "trip.startDate", "data-on-set-time"=>"onStartTimeSet(newDate, oldDate)"}
           .col-md-6
             %h2
               = t("EndDate")
-              %small {{ trip.endDate | date:'yyyy-MM-dd' }}
+              %small{"ng-cloak" => "", "class"=>"ng-cloak"} {{ trip.endDate | date:'yyyy-MM-dd' }}
             %datetimepicker{"data-datetimepicker-config" => "{ startView:'day', minView:'day' }", "data-ng-model" => "trip.endDate", "data-on-set-time"=>"onEndTimeSet(newDate, oldDate)"}
       .description
         %h2
@@ -132,7 +132,7 @@
                   %th= t('PriceUnit')
                   %th= t('Cost')
                   %th
-              %tbody
+              %tbody{"ng-cloak" => "", "class"=>"ng-cloak"}
                 %tr{"ng-repeat" => "budget in budgets"}
 
                   %div
@@ -204,7 +204,7 @@
                         %input#toggle-all.glyphicon.glyphicon-save{"ng-click" => "toggleMarkAll()", "ng-model" => "markAll", :type => "checkbox"}/
                     %td.text
                       %input#new{"ng-keyup" => "addStuff()", "ng-model" => "stuffText", :placeholder => t("WhatStuff"), :size => "30", :type => "text"}/
-                %tbody
+                %tbody{"ng-cloak" => "", "class"=>"ng-cloak"}
                   %tr{"ng-repeat" => "stuff in stuffs.slice().reverse()", "class" => "done-{{stuff.status}}"}
                     %td.status
                       %input.glyphicon.glyphicon-ok{"type" => "checkbox", "ng-model"=>"stuff.status", "ng-click" => "changeStatus(stuff)"}
@@ -217,7 +217,7 @@
                       %button.mod.glyphicon.glyphicon-floppy-disk{"ng-click" => "editOnEnter(stuff)","ng-show" => "stuff.editing"}
 
                       %button.destroy.glyphicon.glyphicon-remove{"ng-click" => "removeItem(stuff)"}
-            %footer{"style"=>"display: block;"}
+            %footer{"style"=>"display: block;","ng-cloak" => "", "class"=>"ng-cloak"}
               .container-fluid
                 .todo-count
                   {{remaining()}} {{itemText()}}
@@ -240,7 +240,7 @@
                         %input#toggle-all.glyphicon.glyphicon-save{"ng-click" => "toggleMarkAll()", "ng-model" => "markAll", :type => "checkbox"}/
                     %td.text
                       %input#new{"ng-keyup" => "addTask()", "ng-model" => "taskText", :placeholder => t("WhatTask"), :size => "30", :type => "text"}/
-                %tbody
+                %tbody{"ng-cloak" => "", "class"=>"ng-cloak"}
                   %tr{"ng-repeat" => "task in tasks.slice().reverse()", "class" => "done-{{task.status}}"}
                     %td.status
                       %input.glyphicon.glyphicon-ok{"type" => "checkbox", "ng-model"=>"task.status", "ng-click" => "changeStatus(task)"}
@@ -252,7 +252,7 @@
                       %button.mod.glyphicon.glyphicon-floppy-disk{"ng-click" => "editOnEnter(task)","ng-show" => "task.editing"}
 
                       %button.destroy.glyphicon.glyphicon-remove{"ng-click" => "removeItem(task)"}
-            %footer{"style"=>"display: block;"}
+            %footer{"style"=>"display: block;","ng-cloak" => "", "class"=>"ng-cloak"}
               .container-fluid
                 .todo-count
                   {{remaining()}} {{itemText()}}

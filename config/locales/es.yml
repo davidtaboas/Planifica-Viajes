@@ -21,6 +21,7 @@
 
 es:
   Title: "Planifica Viajes"
+  copyright: "Una aplicación realizada por David Táboas"
   # AUTH
   sign_in: "Entrar"
   log_out: "Salir"
@@ -33,7 +34,21 @@ es:
   Forgotyourpassword?: "¿Olvidaste tu contraseña?"
   Didn'treceiveconfirmationinstructions?:
   Didn'treceiveunlockinstructions?:
+  current_password: "Contraseña actual"
+  password_confirmation: "Repetir contraseña"
+  leave_blank: "(dejar en blanco si no se quiere cambiar)"
+  need_your_current_password: "(Necesitamos tu contraseña actual para confirmar los cambios)"
+  Update: "Actualizar"
+  EditAccount: "Editar cuenta"
 
+  # SIDEBAR
+  AllYourTrips: "Tus viajes"
+  YourAccount: "Tu cuenta"
+  # PERFIL
+  Latest: "Últimos"
+  Favorites: "Favoritos"
+  Editables: "Editables"
+  # VIAJE
   Description: "Descripción"
   Budget: "Presupuesto"
   BudgetElements: "Elementos Presupuestados"
@@ -73,6 +88,7 @@ es:
   WhatStuff: "¿Qué material necesitas?"
   ErrorOnLogin: "eMail y/o contraseña incorrecta/s"
 
+  # FECHAS
   time:
     formats:
       trip: "%d/%m/%Y"

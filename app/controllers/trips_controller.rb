@@ -16,7 +16,6 @@ class TripsController < ApplicationController
     if can? :write, trip
       render "trips/edit"
     elsif can? :read, trip
-
       render "trips/single"
     else
       authenticate_user!

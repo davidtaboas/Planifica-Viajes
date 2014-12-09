@@ -61,8 +61,16 @@ window.loadScript = ->
   $('.change-image').on "click", () ->
     $(".uploader").fadeIn()
     return
+
+  $('.edit-users').on "click", () ->
+    $(".user-management").fadeIn()
+    return
+
   $(".uploader .cancel").on "click", () ->
     $(".uploader").fadeOut()
+    return
+  $(".user-management .cancel").on "click", () ->
+    $(".user-management").fadeOut()
     return
 
   $(".show-panel").on "click", () ->

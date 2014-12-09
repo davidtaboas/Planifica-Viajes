@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   # API
 
+
   get 'api/t/:trip/items/:type'    => "api#getItems"
   post 'api/t/:trip/items/:type'   => "api#setItems"
   delete 'api/t/:trip/items/:type' => "api#deleteItems"
@@ -32,6 +33,11 @@ Rails.application.routes.draw do
   post 'api/t/:trip/data/'         => "api#setDataTrip"
   post 'api/t/:trip/data/image/'   => "api#setImageTrip"
   delete 'api/t/:trip/data/'       => "api#removeTrip"
+
+
+  get '/api/t/:trip/editors'       => "api#getAllEditors"
+  post '/api/t/:trip/neweditor'    => "api#addEditor"
+  post '/api/t/:trip/deleditor'    => "api#removeEditor"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

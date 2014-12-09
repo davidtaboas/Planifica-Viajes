@@ -31,13 +31,16 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
 
-    if user.has_role?(:admin, Trip)
-      can :manage, Trip
-    elsif user.has_role?(:editor, Trip)
-      can :write, Trip
+    require "awesome_print"
+    ap "DEBUG MANAGE USERS"
+
+
+    if user.username.presence
+        can :manage, Trip, :id => Trip.with_role(:admin, user).pluck(:id)
+        can :write, Trip, :id  => Trip.with_role(:editor, user).pluck(:id)
     else
-      can :read, Trip
-      cannot :read, Trip, :visibility => "private"
+        can :read, Trip
+        cannot :read, Trip, :visibility => "private"
     end
 
 

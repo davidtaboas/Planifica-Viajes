@@ -168,6 +168,8 @@ class ApiController < ApplicationController
     head :ok
   end
 
+
+
   def setImageTrip
 
     trip = Trip.find(params[:trip])
@@ -185,6 +187,31 @@ class ApiController < ApplicationController
 
     head :ok
 
+  end
+
+
+  def getAllEditors
+    trip = Trip.find(params[:trip])
+    editors = User.with_role(:editor, trip)
+    render json: editors
+  end
+
+  def addEditor
+    trip = Trip.find(params[:trip])
+
+
+    editor = User.find_by(:username => request[:neweditor])
+    editor.add_role :editor, trip
+    editors = User.with_role(:editor, trip)
+    render json: editors
+  end
+
+  def removeEditor
+    trip = Trip.find(params[:trip])
+    editor = User.find(request[:oldeditor])
+    editor.remove_role :editor, trip
+    editors = User.with_role(:editor, trip)
+    render json: editors
   end
 
   private

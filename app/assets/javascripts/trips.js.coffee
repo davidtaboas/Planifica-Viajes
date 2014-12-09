@@ -144,6 +144,36 @@ app.controller "tripCtrl",
       return
 
 
+    $scope.allUsers = []
+    $scope.usersCanWrite = []
+    $scope.loadEditors = () ->
+
+      $http.get("/api/t/"+$scope.trip.id+"/editors").success (data) ->
+        $scope.usersCanWrite = data
+        return
+
+      return
+
+    $scope.addUserCanWrite = () ->
+      if event.keyCode is 13 and $scope.addUserText
+        info = {
+          neweditor: $scope.addUserText
+        }
+        $http.post("/api/t/"+$scope.trip.id+"/neweditor", info).success (data) ->
+          $scope.usersCanWrite = data
+          $scope.addUserText = ""
+          return
+      return
+
+
+    $scope.deleteUserCanWrite = (user_id) ->
+      info = {
+          oldeditor: user_id
+      }
+      $http.post("/api/t/"+$scope.trip.id+"/deleditor", info).success (data) ->
+          $scope.usersCanWrite = data
+          return
+      return
 
     return
 

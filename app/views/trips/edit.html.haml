@@ -12,12 +12,31 @@
           %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t("Cancel")
           %button.btn.btn-primary#confirm-delete-trip{:type => "button", "ng-click" => "removeTrip()"}= t("Accept")
   .uploader{"nv-file-drop"=>"", "uploader"=>"uploader", "options" => "{url: '/api/t/{{trip.id}}/data/image' }"}
-    .dragdrop
+    .box-center
       .box-info
         .show-info
           %h3= t("DragImageHere")
           %input.btn.btn-info{"nv-file-select"=>"","uploader"=>"uploader","type"=>"file", "options" => "{url: '/api/t/{{trip.id}}/data/image' }"}
           %button.btn.btn-danger.cancel= t("Cancel")
+  .user-management
+    .box-center
+      .box-info
+        .show-info
+          %h3= t("UserManagement")
+          %form{"role" => "form"}
+            .form-group
+              .input-group.input-group-lg
+                %span.input-group-addon @
+                %input.form-control{:placeholder => "Username", :type => "text","ng-model"=>"search", "id"=>"search", "ng-keyup" => "addUserCanWrite()", "ng-model" => "addUserText"}/
+          %div#showit
+            %ul.list-group
+              %li.list-group-item{"ng-repeat" => "user in usersCanWrite"}
+                %span {{user.username}}
+                %button.badge{"ng-click" => "deleteUserCanWrite(user.id)"}
+                  %span.glyphicon.glyphicon-remove
+
+
+          %button.btn.btn-danger.cancel= t("Close")
   %section#header{"data-speed" => "6", "data-type" => "background", "ng-style" => "tripBackground"}
     %nav.settings
       - if current_user
@@ -29,10 +48,12 @@
         %span.glyphicon.glyphicon-globe{"ng-show" => "trip.visibility == 'public'"}
         %span.glyphicon.glyphicon-eye-open{"ng-show" => "trip.visibility == 'shared'"}
         %span.glyphicon.glyphicon-eye-close{"ng-show" => "trip.visibility == 'private'"}
-
       %button.btn.btn-default.change-image
         %span.glyphicon.glyphicon-picture{}
       - if can? :destroy, Trip
+        %button.btn.btn-default.edit-users{"ng-click" => "loadEditors()"}
+          %span.glyphicon.glyphicon-user
+
         %button.btn.btn-default.delete-trip{"data-target" => "#modal-delete-trip", "data-toggle" => "modal", :type => "button"}
           %span.glyphicon.glyphicon-remove
       .clear

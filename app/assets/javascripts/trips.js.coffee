@@ -8,11 +8,14 @@
 # = require 'medium-editor'
 # = require 'angular-file-upload'
 # = require 'moment'
+# = require 'moment/locale/es'
 # = require 'angular-bootstrap-datetimepicker'
 # = require 'angular-ui-sortable'
 # = require 'ngmap'
 
 # = require 'trips.actions'
+
+
 app = angular.module("PlanificaViajes.Trips", ["ngSanitize", "highcharts-ng", "angularFileUpload", "ui.bootstrap.datetimepicker", "ngMap", "ui.sortable"])
 
 

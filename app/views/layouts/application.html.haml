@@ -8,6 +8,7 @@
     = javascript_tag do
       I18n.defaultLocale = "#{I18n.default_locale}";
       I18n.locale = "#{I18n.locale}";
+      moment.locale(I18n.locale);
     = csrf_meta_tags
   %body{"ng-app" => "PlanificaViajes", "ng-controller" => "login as auth"}
 

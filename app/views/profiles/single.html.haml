@@ -10,79 +10,117 @@
             %li
               =button_to t("DeleteAccount"), {controller: "profiles", action: "delete"}, :target => "_self", :class => "btn btn-default delete", :method => :delete
       %h1= @profile.username
-  %div.clearfix
-  %div.line
-    %a.line-name
-      = t("Latest")
-  %div.col-md-8.col-md-offset-2
-
-    - @trips.each do |trip|
-      - current_user.has_role? :admin, trip
-
-      - if trip.visibility == "public" || current_user == @profile
-        %section.trip
-          %a.image
-            %img{"src" => "#{trip.image.thumb.url}", "width" => "242", "height" => "150"}
-          .info
-            %h3
-              = link_to trip.title, {controller: "trips", action: "single", trip: trip.key}, :target => "_self"
-            %p.description
-              = truncate( strip_tags(trip.description), length: 140)
-            %div.tripMeta
-
-              %span.author
-                - author = trip.author_by_name
-                =link_to author, profile_path(author)
-              %div.dates
-                - if trip.startDate
-                  %span.start
-                    %span.glyphicon.glyphicon-calendar
-                    %strong
-                      = t("StartDate")
-                    = l(trip.startDate, :format => :trip)
-                - if trip.endDate
-                  %span.end
-                    %span.glyphicon.glyphicon-calendar
-                    %strong
-                      = t("EndDate")
-
-                    = l(trip.endDate, :format => :trip)
-
-      %hr
-  %div.clearfix
-  %div.line
-    %a.line-name
-      = t("Favorites")
-  - if current_user == @profile
-    %div.col-md-8.col-md-offset-2
-      - @favorites.each do |favorite|
-
-        %section.favorite
-          %a.image
-            %img{"src" => "#{favorite.image.thumb.url}", "width" => "242", "height" => "150"}
-          .info
-            %h3
-              = link_to favorite.title, {controller: "trips", action: "single", trip: favorite.key}, :target => "_self"
-            %p.description
-              = truncate( strip_tags(favorite.description), length: 140)
-            %div.tripMeta
-
-              %span.author
-                - author = favorite.author_by_name
-                =link_to author, profile_path(author)
-              %div.dates
-                - if favorite.startDate
-                  %span.start
-                    %span.glyphicon.glyphicon-calendar
-                    %strong
-                      = t("StartDate")
-                    = l(favorite.startDate, :format => :trip)
-                - if favorite.endDate
-                  %span.end
-                    %span.glyphicon.glyphicon-calendar
-                    %strong
-                      = t("EndDate")
-
-                    = l(favorite.endDate, :format => :trip)
+  - if @trips.length > 0
     %div.clearfix
     %div.line
+      %a.line-name
+        = t("Latest")
+    %div.col-md-8.col-md-offset-2
+
+      - @trips.each do |trip|
+        - current_user.has_role? :admin, trip
+
+        - if trip.visibility == "public" || current_user == @profile
+          %section.trip
+            %a.image
+              %img{"src" => "#{trip.image.thumb.url}", "width" => "242", "height" => "150"}
+            .info
+              %h3
+                = link_to trip.title, {controller: "trips", action: "single", trip: trip.key}, :target => "_self"
+              %p.description
+                = truncate( strip_tags(trip.description), length: 140)
+              %div.tripMeta
+
+                %span.author
+                  - author = trip.author_by_name
+                  =link_to author, profile_path(author)
+                %div.dates
+                  - if trip.startDate
+                    %span.start
+                      %span.glyphicon.glyphicon-calendar
+                      %strong
+                        = t("StartDate")
+                      = l(trip.startDate, :format => :trip)
+                  - if trip.endDate
+                    %span.end
+                      %span.glyphicon.glyphicon-calendar
+                      %strong
+                        = t("EndDate")
+
+                      = l(trip.endDate, :format => :trip)
+
+        %hr
+  - if @favorites.length > 0
+    %div.clearfix
+    %div.line
+      %a.line-name
+        = t("Favorites")
+    - if current_user == @profile
+      %div.col-md-8.col-md-offset-2
+        - @favorites.each do |favorite|
+
+          %section.favorite
+            %a.image
+              %img{"src" => "#{favorite.image.thumb.url}", "width" => "242", "height" => "150"}
+            .info
+              %h3
+                = link_to favorite.title, {controller: "trips", action: "single", trip: favorite.key}, :target => "_self"
+              %p.description
+                = truncate( strip_tags(favorite.description), length: 140)
+              %div.tripMeta
+
+                %span.author
+                  - author = favorite.author_by_name
+                  =link_to author, profile_path(author)
+                %div.dates
+                  - if favorite.startDate
+                    %span.start
+                      %span.glyphicon.glyphicon-calendar
+                      %strong
+                        = t("StartDate")
+                      = l(favorite.startDate, :format => :trip)
+                  - if favorite.endDate
+                    %span.end
+                      %span.glyphicon.glyphicon-calendar
+                      %strong
+                        = t("EndDate")
+
+                      = l(favorite.endDate, :format => :trip)
+          %hr
+  - if @editables.length > 0
+    %div.clearfix
+    %div.line
+      %a.line-name
+        = t("Editables")
+    - if current_user == @profile
+      %div.col-md-8.col-md-offset-2
+        - @editables.each do |editable|
+
+          %section.editable
+            %a.image
+              %img{"src" => "#{editable.image.thumb.url}", "width" => "242", "height" => "150"}
+            .info
+              %h3
+                = link_to editable.title, {controller: "trips", action: "single", trip: editable.key}, :target => "_self"
+              %p.description
+                = truncate( strip_tags(editable.description), length: 140)
+              %div.tripMeta
+
+                %span.author
+                  - author = editable.author_by_name
+                  =link_to author, profile_path(author)
+                %div.dates
+                  - if editable.startDate
+                    %span.start
+                      %span.glyphicon.glyphicon-calendar
+                      %strong
+                        = t("StartDate")
+                      = l(editable.startDate, :format => :trip)
+                  - if editable.endDate
+                    %span.end
+                      %span.glyphicon.glyphicon-calendar
+                      %strong
+                        = t("EndDate")
+
+                      = l(editable.endDate, :format => :trip)
+          %hr

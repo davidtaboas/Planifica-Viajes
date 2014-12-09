@@ -9,6 +9,7 @@ class ProfilesController < ApplicationController
     @profile = profile
     @trips = profile.trips
     @favorites = profile.trips_marked_as :favorite
+    @editables = Trip.with_role(:editor, profile)
 
   end
 

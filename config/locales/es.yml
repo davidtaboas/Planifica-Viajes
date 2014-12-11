@@ -48,6 +48,7 @@ es:
   Latest: "Últimos"
   Favorites: "Favoritos"
   Editables: "Editables"
+  Actions: "Acciones"
   # VIAJE
   Description: "Descripción"
   Budget: "Presupuesto"
@@ -71,6 +72,9 @@ es:
   Cancel: "Cancelar"
   Save: "Guardar"
   Add: "Añadir"
+  Close: "Cerrar"
+  DeleteTrip: "Eliminar viaje"
+  ManageUsers: "Gestionar Usuarios"
   SharedPreferences: "Privacidad"
   DeleteTripTitle: "Eliminar viaje"
   Accept: "Aceptar"
@@ -88,6 +92,9 @@ es:
   WhatStuff: "¿Qué material necesitas?"
   ErrorOnLogin: "eMail y/o contraseña incorrecta/s"
 
+  # CANCANCAN
+  exception:
+    accessdenied: "No tienes permisos para ver este viaje."
   # FECHAS
   time:
     formats:

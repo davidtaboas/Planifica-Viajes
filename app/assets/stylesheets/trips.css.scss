@@ -1,9 +1,5 @@
-// Place all the styles related to the Trips controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 //= require 'medium-editor'
 //= require 'angular-bootstrap-datetimepicker'
-
 
 @import url(https://fonts.googleapis.com/css?family=Lato);
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
@@ -115,7 +111,7 @@
       padding: 0px;
       margin: 0px;
       opacity: 0.6;
-      span{
+      span,i{
         font-size: 30px;
         line-height: 40px;
         text-align: center;
@@ -526,4 +522,10 @@ $medium_editor_link_color:    #fff;
 
 .medium-editor-placeholder:after {
     color: $medium_editor_border_color;
+}
+
+#social{
+  margin-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+
 }

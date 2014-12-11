@@ -43,32 +43,32 @@
             %div.login-true{"ng-show" => "is_login()"}
               .list-group
                 %li.list-group-item.active
-                  %span.glyphicon.glyphicon-user
+                  %i.fa.fa-user.fa-fw
                   {{username}}
                 -if signed_in?
                   =link_to profile_path(current_user.username), :class => "list-group-item", :target => "_self" do
-                    %span.glyphicon.glyphicon-align-justify
+                    %i.fa.fa-bus.fa-fw
                     = t("AllYourTrips")
                   =link_to edit_user_registration_path, :class => "list-group-item", :target => "_self" do
-                    %span.glyphicon.glyphicon-wrench
+                    %i.fa.fa-wrench.fa-fw
                     = t("YourAccount")
 
               %div.clear
               %button.btn.btn-success{:type => "submit", "ng-click" => "logout()"}
-                %span.glyphicon.glyphicon-off
+                %i.fa.fa-sign-out.fa-fw
                 = t('log_out')
 
 
 
 
 
-    .container-fluid.temp
-      .alert.alert-info.alert-dismissible{:role => "alert", "ng-show" => "#{notice}", "class" => "hide"}
+    .container-fluid.temp{"ng-init" => "notice = '#{notice}'; alert = '#{alert}'"}
+      .alert.alert-info.alert-dismissible{:role => "alert", "ng-show" => "notice.length","ng-cloak" => "", "class"=>"ng-cloak"}
         %button.close{"data-dismiss" => "alert", :type => "button"}
           %span{"aria-hidden" => "true"} ×
           %span.sr-only Close
         %strong= notice
-      .alert.alert-warning.alert-dismissible{:role => "alert", "ng-show" => "#{alert}", "class" => "hide"}
+      .alert.alert-warning.alert-dismissible{:role => "alert", "ng-show" => "alert.length", "ng-cloak" => "", "class"=>"ng-cloak"}
         %button.close{"data-dismiss" => "alert", :type => "button"}
           %span{"aria-hidden" => "true"} ×
           %span.sr-only Close
@@ -77,7 +77,7 @@
       .page
         %nav.navHome
           %button.btn.btn-default
-            %span.glyphicon.glyphicon-home
+            %i.fa.fa-home.fa-2x
 
         =yield
         %footer#end

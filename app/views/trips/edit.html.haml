@@ -41,38 +41,41 @@
     %nav.settings
       - if current_user
         %button.btn.btn-default.favorite{"ng-init" => "favorite = #{@favorite}", "ng-click" => "toggleFavorite()"}
-
-          %span.glyphicon.glyphicon-heart{"ng-show" => "favorite"}
-          %span.glyphicon.glyphicon-heart-empty{"ng-hide" => "favorite"}
-      %button.btn.btn-default.visibility
-        %span.glyphicon.glyphicon-globe{"ng-show" => "trip.visibility == 'public'"}
-        %span.glyphicon.glyphicon-eye-open{"ng-show" => "trip.visibility == 'shared'"}
-        %span.glyphicon.glyphicon-eye-close{"ng-show" => "trip.visibility == 'private'"}
+          %i.fa.fa-heart.fa-2x{"ng-show" => "favorite"}
+          %i.fa.fa-heart-o.fa-2x{"ng-hide" => "favorite"}
+      .btn-group
+        %button.btn.btn-default{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
+          %i.fa.fa-globe.fa-2x{"ng-show" => "trip.visibility == 'public'"}
+          %i.fa.fa-eye.fa-2x{"ng-show" => "trip.visibility == 'shared'"}
+          %i.fa.fa-eye-slash.fa-2x{"ng-show" => "trip.visibility == 'private'"}
+        %ul.dropdown-menu.dropdown-menu-right{:role => "menu"}
+          %li
+            %a{"ng-click" => "changeVisibility('public')"}
+              %i.fa.fa-globe
+              = t("Public")
+            %a{"ng-click" => "changeVisibility('shared')"}
+              %i.fa.fa-eye
+              = t("Shared")
+            %a{"ng-click" => "changeVisibility('private')"}
+              %i.fa.fa-eye-slash
+              = t("Private")
       %button.btn.btn-default.change-image
-        %span.glyphicon.glyphicon-picture{}
+        %i.fa.fa-photo.fa-2x{}
       - if can? :destroy, Trip
-        %button.btn.btn-default.edit-users{"ng-click" => "loadEditors()"}
-          %span.glyphicon.glyphicon-user
-
-        %button.btn.btn-default.delete-trip{"data-target" => "#modal-delete-trip", "data-toggle" => "modal", :type => "button"}
-          %span.glyphicon.glyphicon-remove
+        .btn-group
+          %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
+            %i.fa.fa-cogs.fa-fw
+          %ul.dropdown-menu.dropdown-menu-right{:role => "menu"}
+            %li
+              %a.edit-users{"ng-click" => "loadEditors()"}
+                %i.fa.fa-group.fa-fw
+                = t("ManageUsers")
+              %a.delete-trip{"data-target" => "#modal-delete-trip", "data-toggle" => "modal", :type => "button"}
+                %i.fa.fa-remove.fa-fw
+                = t("DeleteTrip")
       .clear
       %form{"role"=>"form"}
-        %input.form-control.sharedkey{"type"=>"text", "ng-show" => "trip.visibility == 'shared'", "value" => "{{sharedUrl}}", "onClick"=>"this.select();", "ng-cloak" => "", "class"=>"ng-cloak"}
-    #sharedpreferences.popover.fade.left.in{:role => "tooltip"}
-      .arrow{:style => "top: 10%;"}
-      %h3.popover-title= t("SharedPreferences")
-      .popover-content
-        .btn-group-vertical
-          %button.btn.btn-default{"ng-click" => "changeVisibility('private')"}
-            %span.glyphicon.glyphicon-eye-close
-            = t("Private")
-          %button.btn.btn-default{"ng-click" => "changeVisibility('shared')"}
-            %span.glyphicon.glyphicon-eye-open
-            = t("Shared")
-          %button.btn.btn-default{"ng-click" => "changeVisibility('public')"}
-            %span.glyphicon.glyphicon-globe
-            = t("Public")
+        %input.form-control.sharedkey{"type"=>"text", "ng-hide" => "trip.visibility == 'private'", "value" => "{{sharedUrl}}", "onClick"=>"this.select();", "ng-cloak" => "", "class"=>"ng-cloak"}
     .container-fluid.header-info
       %h1.editable{"ng-model" => "trip.title", "ng-cloak" => "", "class"=>"ng-cloak"} {{trip.title}}
       %button.btn.btn-success.save-title{"type" => "button", "ng-click" => "saveTitle()"}= t("Save")
@@ -259,3 +262,15 @@
                 %button.clear-completed.btn.btn-primary.btn-xs{"ng-click"=>"clear()","ng-show"=>"hasDone()"}
                   = t("ClearCompleted")
                   %span ({{(tasks.length - remaining())}})
+  / Footer
+  %section#social
+    .container-fluid
+      %div
+        %ul.list-inline
+          %li= t("Share:")
+          %li
+            = link_to share_url("facebook","http://planificaviajes.herokuapp.com/t/{{trip.key}}") do
+              %i.fa.fa-facebook-square.fa-2x
+          %li
+            = link_to share_url("twitter","http://planificaviajes.herokuapp.com/t/{{trip.key}}") do
+              %i.fa.fa-twitter-square.fa-2x

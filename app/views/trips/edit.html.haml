@@ -74,10 +74,17 @@
                 %i.fa.fa-remove.fa-fw
                 = t("DeleteTrip")
       .clear
-      %form{"role"=>"form"}
-        %input.form-control.sharedkey{"type"=>"text", "ng-hide" => "trip.visibility == 'private'", "value" => "{{sharedUrl}}", "onClick"=>"this.select();", "ng-cloak" => "", "class"=>"ng-cloak"}
+
+      .sharedkey
+        .input-group.input-group-sm{"ng-hide" => "trip.visibility == 'private'", "ng-cloak" => "", "class"=>"ng-cloak"}
+          %span.input-group-addon
+            %i.fa.fa-link.fa-fw
+          %input.form-control{:placeholder => "Username", :type => "text", "value"=>"{{sharedUrl}}", "onClick"=>"this.select();"}/
     .container-fluid.header-info
-      %h1.editable{"ng-model" => "trip.title", "ng-cloak" => "", "class"=>"ng-cloak"} {{trip.title}}
+      %h1.editable{"ng-model" => "trip.title", "ng-cloak" => "", "class"=>"ng-cloak"}
+        {{trip.title}}
+        %span#typed-cursor.blinking
+          |
       %button.btn.btn-success.save-title{"type" => "button", "ng-click" => "saveTitle()"}= t("Save")
   / Section 2
   %section#map{"data-speed" => "4", "data-type" => "background", "ng-controller" => "mapCtrl"}
@@ -265,12 +272,21 @@
   / Footer
   %section#social
     .container-fluid
-      %div
-        %ul.list-inline
-          %li= t("Share:")
-          %li
-            = link_to share_url("facebook","http://planificaviajes.herokuapp.com/t/{{trip.key}}") do
-              %i.fa.fa-facebook-square.fa-2x
-          %li
-            = link_to share_url("twitter","http://planificaviajes.herokuapp.com/t/{{trip.key}}") do
-              %i.fa.fa-twitter-square.fa-2x
+      .row
+        .col-md-6
+
+        .col-md-6
+          .col-md-6
+            %ul.list-inline.text-right
+              %li= t("Share")
+              %li
+                = link_to share_url("facebook","http://planificaviajes.herokuapp.com/t/{{trip.key}}") do
+                  %i.fa.fa-facebook-square.fa-2x
+              %li
+                = link_to share_url("twitter","http://planificaviajes.herokuapp.com/t/{{trip.key}}") do
+                  %i.fa.fa-twitter-square.fa-2x
+          .col-md-6
+            .input-group.input-group-sm
+              %span.input-group-addon
+                %i.fa.fa-link.fa-fw
+              %input.form-control{:placeholder => "Username", :type => "text", "value"=>"{{sharedUrl}}", "onClick"=>"this.select();"}/

@@ -136,6 +136,9 @@ app.controller "tripCtrl",
         $(".save-title").animate
           opacity: 0
         , 500
+        $("h1.editable #typed-cursor").animate
+          opacity: 1
+        , 500
         return
       return
 

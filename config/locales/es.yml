@@ -91,7 +91,7 @@ es:
   WhatTask: "¿Qué tarea debes realizar?"
   WhatStuff: "¿Qué material necesitas?"
   ErrorOnLogin: "eMail y/o contraseña incorrecta/s"
-
+  Share: "Compartir:"
   # CANCANCAN
   exception:
     accessdenied: "No tienes permisos para ver este viaje."

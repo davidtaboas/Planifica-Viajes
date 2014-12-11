@@ -93,8 +93,8 @@
     right: 20px;
     top: 20px;
 
-    input.sharedkey{
-      width: 250px;
+    .sharedkey{
+      width: 212px;
       float: left;
       position: absolute;
       right: 0;
@@ -525,7 +525,75 @@ $medium_editor_link_color:    #fff;
 }
 
 #social{
+  padding-top: 20px;
   margin-top: 20px;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
 
+}
+
+#typed-cursor {
+  font-weight: 100;
+  color: black;
+}
+
+#typed-cursor {
+  color: #fff;
+  font-weight: 100;
+}
+
+#typed-cursor.blinking {
+  -webkit-animation: 1s blink step-end infinite;
+  -moz-animation: 1s blink step-end infinite;
+  -ms-animation: 1s blink step-end infinite;
+  -o-animation: 1s blink step-end infinite;
+  animation: 1s blink step-end infinite;
+}
+
+@keyframes "blink" {
+  from,to {
+  color: transparent;
+}
+ 50% {
+    color: #fff;
+ }
+
+}
+
+@-moz-keyframes blink {
+  from,to {
+  color: transparent;
+}
+ 50% {
+   color: #fff;
+ }
+
+}
+
+@-webkit-keyframes "blink" {
+  from,to {
+  color: transparent;
+}
+ 50% {
+   color: #fff;
+ }
+
+}
+
+@-ms-keyframes "blink" {
+  from,to {
+  color: transparent;
+}
+ 50% {
+   color: #fff;
+ }
+
+}
+
+@-o-keyframes "blink" {
+  from,to {
+  color: transparent;
+}
+ 50% {
+   color: #fff;
+ }
 }

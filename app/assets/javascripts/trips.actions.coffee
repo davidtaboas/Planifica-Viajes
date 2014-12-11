@@ -26,6 +26,9 @@ window.loadScript = ->
   )
 
   $("h1.editable").focus ->
+    $("h1.editable #typed-cursor").animate
+      opacity: 0
+    , 500
     $(".save-title").animate
       opacity: 1
     , 500
@@ -36,6 +39,9 @@ window.loadScript = ->
     if firstTitle is $(this).text()
       $(".save-title").animate
         opacity: 0
+      , 500
+      $("h1.editable #typed-cursor").animate
+        opacity: 1
       , 500
     return
 

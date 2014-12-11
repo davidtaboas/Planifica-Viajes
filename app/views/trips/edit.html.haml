@@ -26,8 +26,11 @@
           %form{"role" => "form"}
             .form-group
               .input-group.input-group-lg
-                %span.input-group-addon @
-                %input.form-control{:placeholder => "Username", :type => "text","ng-model"=>"search", "id"=>"search", "ng-keyup" => "addUserCanWrite()", "ng-model" => "addUserText"}/
+                %span.input-group-addon
+                  %i.fa.fa-user.fa-fw{ "ng-hide"=>"loadingUsers"}
+                  %i.fa.fa-refresh.fa-fw{ "ng-show"=>"loadingUsers"}
+                %input.form-control{"ng-model" => "asyncSelected", :placeholder => "username", :type => "text", :typeahead => "user for user in getUsers($viewValue)", "typeahead-loading" => "loadingUsers", "typeahead-on-select" => "addUserCanWrite($item, $model, $label)"}/
+
           %div#showit
             %ul.list-group
               %li.list-group-item{"ng-repeat" => "user in usersCanWrite"}
@@ -83,8 +86,6 @@
     .container-fluid.header-info
       %h1.editable{"ng-model" => "trip.title", "ng-cloak" => "", "class"=>"ng-cloak"}
         {{trip.title}}
-        %span#typed-cursor.blinking
-          |
       %button.btn.btn-success.save-title{"type" => "button", "ng-click" => "saveTitle()"}= t("Save")
   / Section 2
   %section#map{"data-speed" => "4", "data-type" => "background", "ng-controller" => "mapCtrl"}

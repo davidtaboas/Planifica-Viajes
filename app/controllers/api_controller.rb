@@ -214,6 +214,21 @@ class ApiController < ApplicationController
     render json: editors
   end
 
+  def getUsers
+
+
+    search = params[:search]
+    me = params[:username]
+
+    trip = Trip.find(params[:trip])
+    editors = User.with_role(:editor, trip).select(:id)
+
+    users = User.select(:id,:username).where("username LIKE ? AND username != ? AND id NOT IN(?)", "%#{search}%", me, editors)
+
+    render json: users
+  end
+
+
   private
 
   def is_link(link)

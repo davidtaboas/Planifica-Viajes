@@ -14,6 +14,7 @@
     "moment": "latest",
     "angular-bootstrap-datetimepicker": "latest",
     "angular-ui-sortable": "latest",
+    "angular-bootstrap": "latest",
     "ngmap": "latest",
     "components-font-awesome": "latest"
   },

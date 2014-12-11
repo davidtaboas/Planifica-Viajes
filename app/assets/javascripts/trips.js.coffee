@@ -11,12 +11,13 @@
 # = require 'moment/locale/es'
 # = require 'angular-bootstrap-datetimepicker'
 # = require 'angular-ui-sortable'
+# = require 'angular-bootstrap'
 # = require 'ngmap'
 
 # = require 'trips.actions'
 
 
-app = angular.module("PlanificaViajes.Trips", ["ngSanitize", "highcharts-ng", "angularFileUpload", "ui.bootstrap.datetimepicker", "ngMap", "ui.sortable"])
+app = angular.module("PlanificaViajes.Trips", ["ngSanitize", "highcharts-ng", "angularFileUpload", "ui.bootstrap.datetimepicker", "ngMap", "ui.sortable", "ui.bootstrap"])
 
 
 app.controller "tripCtrl",
@@ -136,9 +137,7 @@ app.controller "tripCtrl",
         $(".save-title").animate
           opacity: 0
         , 500
-        $("h1.editable #typed-cursor").animate
-          opacity: 1
-        , 500
+
         return
       return
 
@@ -152,6 +151,17 @@ app.controller "tripCtrl",
 
     $scope.allUsers = []
     $scope.usersCanWrite = []
+
+    $scope.getUsers = (val) ->
+      $http.get("/api/t/"+$scope.trip.id+"/users/not/" + $scope.username + "/",
+        params:
+          search: val
+        ).then (response) ->
+        response.data.map (item) ->
+          item.username
+
+
+
     $scope.loadEditors = () ->
 
       $http.get("/api/t/"+$scope.trip.id+"/editors").success (data) ->
@@ -160,15 +170,17 @@ app.controller "tripCtrl",
 
       return
 
-    $scope.addUserCanWrite = () ->
-      if event.keyCode is 13 and $scope.addUserText
-        info = {
-          neweditor: $scope.addUserText
-        }
-        $http.post("/api/t/"+$scope.trip.id+"/neweditor", info).success (data) ->
-          $scope.usersCanWrite = data
-          $scope.addUserText = ""
-          return
+
+    $scope.addUserCanWrite = ($item, $model, $label) ->
+
+
+      info = {
+        neweditor: $item
+      }
+      $http.post("/api/t/"+$scope.trip.id+"/neweditor", info).success (data) ->
+        $scope.usersCanWrite = data
+        $scope.asyncSelected = ""
+        return
       return
 
 

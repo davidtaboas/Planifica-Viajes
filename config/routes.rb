@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 't/:trip'                    => 'trips#single', as: 'trip'
   get 'u/:username/new/trip'       => 'trips#create'
 
+
+
   # API
 
 
@@ -38,6 +40,9 @@ Rails.application.routes.draw do
   get '/api/t/:trip/editors'       => "api#getAllEditors"
   post '/api/t/:trip/neweditor'    => "api#addEditor"
   post '/api/t/:trip/deleditor'    => "api#removeEditor"
+
+
+  get '/api/t/:trip/users/not/:username/'  => "api#getUsers"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -25,7 +25,6 @@ class Trip < ActiveRecord::Base
   end
 
   def author_by_name
-    require "awesome_print"
     user = User.find(self.user_id)
     return user.username
   end

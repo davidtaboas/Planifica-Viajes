@@ -18,7 +18,12 @@ class TripsController < ApplicationController
     elsif can? :read, trip
       render "trips/single"
     else
-      authenticate_user!
+      if user_signed_in?
+        authorize! :read, trip
+      else
+        authenticate_user!
+      end
+
     end
 
   end

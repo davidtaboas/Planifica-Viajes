@@ -31,17 +31,15 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
 
-    require "awesome_print"
-    ap "DEBUG MANAGE USERS"
-
-
     if user.username.presence
         can :manage, Trip, :id => Trip.with_role(:admin, user).pluck(:id)
         can :write, Trip, :id  => Trip.with_role(:editor, user).pluck(:id)
-    else
-        can :read, Trip
-        cannot :read, Trip, :visibility => "private"
+
     end
+
+    can :read, Trip, :visibility => "public"
+    can :read, Trip, :visibility => "shared"
+
 
 
 

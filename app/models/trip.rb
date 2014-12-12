@@ -17,8 +17,8 @@ class Trip < ActiveRecord::Base
     string = (0...5).map { o[rand(o.length)] }.join
     #comprobar que key no existe
 
-    self.title ||= "Trip"
-    self.description ||= "<p>Type a nice description...</p>"
+    self.title ||= t("trip.tempTitle")
+    self.description ||= t("trip.tempDescription")
     self.visibility ||= "private"
     self.key ||= string
     self.user.add_role :admin, self

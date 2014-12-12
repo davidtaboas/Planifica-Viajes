@@ -27,18 +27,18 @@
             %div.login-false{"ng-hide" => "is_login()"}
               .form-group{"ng-class" => "{ 'has-error' : errorOnLogin() }"}
 
-                %label.control-label{}= t("ErrorOnLogin")
+                %label.control-label{}= t("auth.errorOnLogin")
 
-                %input.form-control{:placeholder => t("username"), :type => "text", :name => "email", "ng-model" => "formInfo.email", "required" => ""}/
+                %input.form-control{:placeholder => t("auth.username"), :type => "text", :name => "email", "ng-model" => "formInfo.email", "required" => ""}/
 
                 .clear
 
-                %input.form-control{:placeholder => t("password"), :type => "password", :name => "password", "ng-model" => "formInfo.password", "required" => ""}/
+                %input.form-control{:placeholder => t("auth.password"), :type => "password", :name => "password", "ng-model" => "formInfo.password", "required" => ""}/
 
-                %button.btn.btn-success{:type => "submit", "ng-click" => "login()"}= t('sign_in')
+                %button.btn.btn-success{:type => "submit", "ng-click" => "login()"}= t('auth.sign_in')
                 .clear
                 .register
-                  = link_to t("Register"), new_user_registration_path
+                  = link_to t("auth.register"), new_user_registration_path
 
             %div.login-true{"ng-show" => "is_login()"}
               .list-group
@@ -48,15 +48,15 @@
                 -if signed_in?
                   =link_to profile_path(current_user.username), :class => "list-group-item", :target => "_self" do
                     %i.fa.fa-bus.fa-fw
-                    = t("AllYourTrips")
+                    = t("user.allYourTrips")
                   =link_to edit_user_registration_path, :class => "list-group-item", :target => "_self" do
                     %i.fa.fa-wrench.fa-fw
-                    = t("YourAccount")
+                    = t("user.yourAccount")
 
               %div.clear
               %button.btn.btn-success{:type => "submit", "ng-click" => "logout()"}
                 %i.fa.fa-sign-out.fa-fw
-                = t('log_out')
+                = t('auth.log_out')
 
 
 

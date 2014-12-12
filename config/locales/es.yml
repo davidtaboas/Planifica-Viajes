@@ -1,97 +1,87 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 es:
-  Title: "Planifica Viajes"
-  copyright: "Una aplicación realizada por David Táboas"
+  seo:
+    title: "Planifica Viajes"
+    description: "Planifica viajes desde el principio, con tu ruta, presupuesto, inventario y tareas."
+    keywords: "planifica viajes, preparar viaje, borrador viaje"
+  web:
+    copyright: "Una aplicación realizada por David Táboas"
   # AUTH
-  sign_in: "Entrar"
-  log_out: "Salir"
-  username: "Usuario"
-  password: "Contraseña"
-  Register: "¿Quieres registrarte?"
-  charactersminimum: "caracteres como mínimo"
-  Login: "Entrar"
-  Signup: "Registrarte"
-  Forgotyourpassword?: "¿Olvidaste tu contraseña?"
-  Didn'treceiveconfirmationinstructions?:
-  Didn'treceiveunlockinstructions?:
-  current_password: "Contraseña actual"
-  password_confirmation: "Repetir contraseña"
-  leave_blank: "(dejar en blanco si no se quiere cambiar)"
-  need_your_current_password: "(Necesitamos tu contraseña actual para confirmar los cambios)"
-  Update: "Actualizar"
-  EditAccount: "Editar cuenta"
+  auth:
+    sign_in: "Entrar"
+    log_out: "Salir"
+    username: "Usuario"
+    password: "Contraseña"
+    register: "¿Quieres registrarte?"
+    charactersminimum: "caracteres como mínimo"
+    login: "Identificarse"
+    signup: "Registrarte"
+    forgotyourpassword?: "¿Olvidaste tu contraseña?"
+    didn'treceiveconfirmationinstructions?:
+    didn'treceiveunlockinstructions?:
+    current_password: "Contraseña actual"
+    password_confirmation: "Repetir contraseña"
+    leave_blank: "(dejar en blanco si no se quiere cambiar)"
+    need_your_current_password: "(Necesitamos tu contraseña actual para confirmar los cambios)"
+    update: "Actualizar"
+    uditAccount: "Editar cuenta"
+    errorOnLogin: "eMail y/o contraseña incorrecta/s"
 
-  # SIDEBAR
-  AllYourTrips: "Tus viajes"
-  YourAccount: "Tu cuenta"
-  # PERFIL
-  Latest: "Últimos"
-  Favorites: "Favoritos"
-  Editables: "Editables"
-  Actions: "Acciones"
+  # USUARIOS
+  user:
+    allYourTrips: "Tus viajes"
+    yourAccount: "Tu cuenta"
+    latest: "Últimos"
+    favorites: "Favoritos"
+    editables: "Editables"
+    actions: "Acciones"
+    deleteAccount: "Eliminar cuenta"
+    newTrip: "Nuevo viaje"
+    accountDeleted: "Cuenta eliminada"
   # VIAJE
-  Description: "Descripción"
-  Budget: "Presupuesto"
-  BudgetElements: "Elementos Presupuestados"
-  Stuffs: "Inventario"
-  ToDo: "Tareas"
-  Item: "Item"
-  Units: "Unidades"
-  PriceUnit: "Precio/Unidad"
-  Cost: "Coste"
-  transport: "Transporte"
-  food: "Manutención"
-  sleep: "Alojamiento"
-  others: "Otros"
-  NewTrip: "Nuevo viaje"
-  DeleteAccount: "Eliminar cuenta"
-  budget_distribution: "Distribución de presupuesto"
-  AccountDeleted: "Cuenta eliminada"
-  AreYouSure?: "¿Estás seguro de eliminar esta planificación?"
-  DragImageHere: "Arrastra una imagen hasta aquí"
-  Cancel: "Cancelar"
-  Save: "Guardar"
-  Add: "Añadir"
-  Close: "Cerrar"
-  DeleteTrip: "Eliminar viaje"
-  ManageUsers: "Gestionar Usuarios"
-  SharedPreferences: "Privacidad"
-  DeleteTripTitle: "Eliminar viaje"
-  Accept: "Aceptar"
-  Private: "Privado"
-  Shared: "Compartido"
-  Public: "Público"
-  StartDate: "Inicio"
-  EndDate: "Fin"
-  ClearCompleted: "Eliminar completadas"
-  leftstuff: "inventario restante"
-  leftstuffs: "inventario restantes"
-  lefttasks: "tareas restantes"
-  lefttask: "tarea restante"
-  WhatTask: "¿Qué tarea debes realizar?"
-  WhatStuff: "¿Qué material necesitas?"
-  ErrorOnLogin: "eMail y/o contraseña incorrecta/s"
-  Share: "Compartir:"
+  trip:
+    tempTitle: "Viaje"
+    tempDescription: "<p>Escribe una bonita descripción...</p>"
+    description: "Descripción"
+    budget: "Presupuesto"
+    budgetElements: "Elementos Presupuestados"
+    stuffs: "Inventario"
+    toDo: "Tareas"
+    item: "Item"
+    units: "Unidades"
+    priceUnit: "Precio/Unidad"
+    cost: "Coste"
+    transport: "Transporte"
+    food: "Manutención"
+    sleep: "Alojamiento"
+    others: "Otros"
+    budget_distribution: "Distribución de presupuesto"
+    areYouSure?: "¿Estás seguro de eliminar esta planificación?"
+    dragImageHere: "Arrastra una imagen hasta aquí"
+    deleteTrip: "Eliminar viaje"
+    manageUsers: "Gestionar Usuarios"
+    sharedPreferences: "Privacidad"
+    deleteTripTitle: "Eliminar viaje"
+    private: "Privado"
+    shared: "Compartido"
+    public: "Público"
+    startDate: "Inicio"
+    endDate: "Fin"
+    clearCompleted: "Eliminar completadas"
+    leftstuff: "inventario restante"
+    leftstuffs: "inventario restantes"
+    lefttasks: "tareas restantes"
+    lefttask: "tarea restante"
+    whatTask: "¿Qué tarea debes realizar?"
+    whatStuff: "¿Qué material necesitas?"
+    share: "Compartir:"
+    userManagement: "Gestión de usuarios"
+  # GENERAL
+  general:
+    accept: "Aceptar"
+    cancel: "Cancelar"
+    save: "Guardar"
+    add: "Añadir"
+    close: "Cerrar"
   # CANCANCAN
   exception:
     accessdenied: "No tienes permisos para ver este viaje."
@@ -100,6 +90,7 @@ es:
     formats:
       trip: "%d/%m/%Y"
 
+  # AUTENTIFICACIÓN
   devise:
     confirmations:
       confirmed: "Su cuenta ha sido confirmada."
@@ -134,16 +125,16 @@ es:
       updated: "Su contraseña ha cambiado correctamente. Ha sido identificado correctamente."
       updated_not_active: "Su contraseña se ha cambiado correctamente."
     registrations:
-      destroyed: "Â¡Adiós! Su cuenta ha sido cancelada. Esperamos volver a verle pronto."
-      signed_up: "Â¡Bienvenido! Usted ha sido identificado."
+      destroyed: "¡Adiós! Tu cuenta ha sido cancelada. Esperamos volver a verte pronto con más viajes."
+      signed_up: "¡Bienvenido! Te has identificado correctamente."
       signed_up_but_inactive: "Se ha registrado correctamente, pero no ha podido iniciar sesión porque su cuenta no ha sido activada."
       signed_up_but_locked: "Se ha registrado correctamente, pero no ha podido iniciar sesión porque su cuenta está bloqueada."
       signed_up_but_unconfirmed: "Se le ha enviado un mensaje con un enlace de confirmación. Por favor visite el enlace para activar su cuenta."
       update_needs_confirmation: "Ha actualizado su cuenta correctamente, sin embargo necesitamos verificar su nueva cuenta de correo. Por favor revise su correo electrónico y visite el enlace para finalizar la confirmación de su nueva dirección de correo electrónico."
       updated: "Ha actualizado tu cuenta correctamente."
     sessions:
-      signed_in: "Ha iniciado sesión satisfactoriamente."
-      signed_out: "Ha cerrado la sesión satisfactoriamente."
+      signed_in: "Has iniciado sesión satisfactoriamente."
+      signed_out: "Has cerrado la sesión satisfactoriamente."
     unlocks:
       send_instructions: "Recibira un correo electrónico en unos minutos con instrucciones sobre cómo desbloquear su cuenta."
       send_paranoid_instructions: "Si su cuenta existe, recibira un correo electrónico en unos minutos con instrucciones sobre cómo desbloquear su cuenta."

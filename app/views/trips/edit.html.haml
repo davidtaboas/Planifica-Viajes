@@ -6,30 +6,30 @@
           %button.close{"data-dismiss" => "modal", :type => "button"}
             %span{"aria-hidden" => "true"} ×
             %span.sr-only Close
-          %h4#modal-delete-title.modal-title= t("DeleteTripTitle")
-        .modal-body= t("AreYouSure?")
+          %h4#modal-delete-title.modal-title= t("trip.deleteTripTitle")
+        .modal-body= t("trip.areYouSure?")
         .modal-footer
-          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t("Cancel")
-          %button.btn.btn-primary#confirm-delete-trip{:type => "button", "ng-click" => "removeTrip()"}= t("Accept")
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t("general.cancel")
+          %button.btn.btn-primary#confirm-delete-trip{:type => "button", "ng-click" => "removeTrip()"}= t("general.accept")
   .uploader{"nv-file-drop"=>"", "uploader"=>"uploader", "options" => "{url: '/api/t/{{trip.id}}/data/image' }"}
     .box-center
       .box-info
         .show-info
-          %h3= t("DragImageHere")
+          %h3= t("trip.dragImageHere")
           %input.btn.btn-info{"nv-file-select"=>"","uploader"=>"uploader","type"=>"file", "options" => "{url: '/api/t/{{trip.id}}/data/image' }"}
-          %button.btn.btn-danger.cancel= t("Cancel")
+          %button.btn.btn-danger.cancel= t("general.cancel")
   .user-management
     .box-center
       .box-info
         .show-info
-          %h3= t("UserManagement")
+          %h3= t("trip.userManagement")
           %form{"role" => "form"}
             .form-group
               .input-group.input-group-lg
                 %span.input-group-addon
                   %i.fa.fa-user.fa-fw{ "ng-hide"=>"loadingUsers"}
                   %i.fa.fa-refresh.fa-fw{ "ng-show"=>"loadingUsers"}
-                %input.form-control{"ng-model" => "asyncSelected", :placeholder => "username", :type => "text", :typeahead => "user for user in getUsers($viewValue)", "typeahead-loading" => "loadingUsers", "typeahead-on-select" => "addUserCanWrite($item, $model, $label)"}/
+                %input.form-control{"ng-model" => "asyncSelected", :placeholder => t("auth.username"), :type => "text", :typeahead => "user for user in getUsers($viewValue)", "typeahead-loading" => "loadingUsers", "typeahead-on-select" => "addUserCanWrite($item, $model, $label)"}/
 
           %div#showit
             %ul.list-group
@@ -39,7 +39,7 @@
                   %span.glyphicon.glyphicon-remove
 
 
-          %button.btn.btn-danger.cancel= t("Close")
+          %button.btn.btn-danger.cancel= t("general.close")
   %section#header{"data-speed" => "6", "data-type" => "background", "ng-style" => "tripBackground"}
     %nav.settings
       - if current_user
@@ -55,13 +55,13 @@
           %li
             %a{"ng-click" => "changeVisibility('public')"}
               %i.fa.fa-globe
-              = t("Public")
+              = t("trip.public")
             %a{"ng-click" => "changeVisibility('shared')"}
               %i.fa.fa-eye
-              = t("Shared")
+              = t("trip.shared")
             %a{"ng-click" => "changeVisibility('private')"}
               %i.fa.fa-eye-slash
-              = t("Private")
+              = t("trip.private")
       %button.btn.btn-default.change-image
         %i.fa.fa-photo.fa-2x{}
       - if can? :destroy, Trip
@@ -72,10 +72,10 @@
             %li
               %a.edit-users{"ng-click" => "loadEditors()"}
                 %i.fa.fa-group.fa-fw
-                = t("ManageUsers")
+                = t("trip.manageUsers")
               %a.delete-trip{"data-target" => "#modal-delete-trip", "data-toggle" => "modal", :type => "button"}
                 %i.fa.fa-remove.fa-fw
-                = t("DeleteTrip")
+                = t("trip.deleteTrip")
       .clear
 
       .sharedkey
@@ -86,7 +86,7 @@
     .container-fluid.header-info
       %h1.editable{"ng-model" => "trip.title", "ng-cloak" => "", "class"=>"ng-cloak"}
         {{trip.title}}
-      %button.btn.btn-success.save-title{"type" => "button", "ng-click" => "saveTitle()"}= t("Save")
+      %button.btn.btn-success.save-title{"type" => "button", "ng-click" => "saveTitle()"}= t("general.save")
   / Section 2
   %section#map{"data-speed" => "4", "data-type" => "background", "ng-controller" => "mapCtrl"}
     / #route
@@ -115,33 +115,33 @@
         .row
           .col-md-6
             %h2
-              = t("StartDate")
+              = t("trip.startDate")
               %small{"ng-cloak" => "", "class"=>"ng-cloak"} {{ trip.startDate | date:'yyyy-MM-dd' }}
             %datetimepicker{"data-datetimepicker-config" => "{ startView:'day', minView:'day' }", "data-ng-model" => "trip.startDate", "data-on-set-time"=>"onStartTimeSet(newDate, oldDate)"}
           .col-md-6
             %h2
-              = t("EndDate")
+              = t("trip.endDate")
               %small{"ng-cloak" => "", "class"=>"ng-cloak"} {{ trip.endDate | date:'yyyy-MM-dd' }}
             %datetimepicker{"data-datetimepicker-config" => "{ startView:'day', minView:'day' }", "data-ng-model" => "trip.endDate", "data-on-set-time"=>"onEndTimeSet(newDate, oldDate)"}
       .description
         %h2
-          = t('Description')
-          %button.btn.btn-success.save-description{"type" => "button", "ng-click" => "saveDescription()"}= t("Save")
+          = t('trip.description')
+          %button.btn.btn-success.save-description{"type" => "button", "ng-click" => "saveDescription()"}= t("general.save")
         .content.editable{"ng-bind-html" => "trip.description", "ng-model" => "trip.description"}
         / %p {{trip.image.url}}
       %hr/
       .budget{"ng-controller" => "budgetCtrl" }
-        %h2= t('Budget')
+        %h2= t('trip.budget')
         .row
           .col-md-6
-            %h4= t('BudgetElements')
+            %h4= t('trip.budgetElements')
             %table.table.table-hover
               %thead
                 %tr
-                  %th= t('Item')
-                  %th= t('Units')
-                  %th= t('PriceUnit')
-                  %th= t('Cost')
+                  %th= t('trip.item')
+                  %th= t('trip.units')
+                  %th= t('trip.priceUnit')
+                  %th= t('trip.cost')
                   %th
               %tbody{"ng-cloak" => "", "class"=>"ng-cloak"}
                 %tr{"ng-repeat" => "budget in budgets"}
@@ -150,10 +150,10 @@
                     %td
                       %div{"ng-hide" => "budget.editing"}
                         {{budget.description}}
-                        %span.label.label-danger{"ng-if" => "budget.category === 1"}= t('transport')
-                        %span.label.label-success{"ng-if" => "budget.category === 2"}= t('food')
-                        %span.label.label-primary{"ng-if" => "budget.category === 3"}= t('sleep')
-                        %span.label.label-warning{"ng-if" => "budget.category === 4"}= t('others')
+                        %span.label.label-danger{"ng-if" => "budget.category === 1"}=  t('trip.transport')
+                        %span.label.label-success{"ng-if" => "budget.category === 2"}= t('trip.food')
+                        %span.label.label-primary{"ng-if" => "budget.category === 3"}= t('trip.sleep')
+                        %span.label.label-warning{"ng-if" => "budget.category === 4"}= t('trip.others')
                       %div{"ng-show" => "budget.editing"}
                         %input.title{"type" => "text", "ng-model" => "budget.description"}/
                         %select.cat{"ng-model" => "budget.category", "ng-options"=>"category.id as category.name for category in categories"}
@@ -186,7 +186,7 @@
                   %td
                     %span {{newbudget.units * newbudget.priceperunit | currency:"€":2}}
                   %td
-                    %button.btn.btn-primary{"type" => "button", "ng-click" => "addBudget(newbudget)"}= t("Add")
+                    %button.btn.btn-primary{"type" => "button", "ng-click" => "addBudget(newbudget)"}= t("general.add")
                 %tr
                   %td TOTAL
                   %td
@@ -202,19 +202,19 @@
 
 
             %header
-              %h3= t('Stuffs')
+              %h3= t('trip.stuffs')
             %section
               %table.table.table-hover
                 %thead
                   %tr
                     %th #
-                    %th= t("Description")
+                    %th= t("trip.description")
                   %tr
                     %td.status
                       %div{"ng-show" => "isStuff()"}
                         %input#toggle-all.glyphicon.glyphicon-save{"ng-click" => "toggleMarkAll()", "ng-model" => "markAll", :type => "checkbox"}/
                     %td.text
-                      %input#new{"ng-keyup" => "addStuff()", "ng-model" => "stuffText", :placeholder => t("WhatStuff"), :size => "30", :type => "text"}/
+                      %input#new{"ng-keyup" => "addStuff()", "ng-model" => "stuffText", :placeholder => t("trip.whatStuff"), :size => "30", :type => "text"}/
                 %tbody{"ng-cloak" => "", "class"=>"ng-cloak"}
                   %tr{"ng-repeat" => "stuff in stuffs.slice().reverse()", "class" => "done-{{stuff.status}}"}
                     %td.status
@@ -233,24 +233,24 @@
                 .todo-count
                   {{remaining()}} {{itemText()}}
                 %button.clear-completed.btn.btn-primary.btn-xs{"ng-click"=>"clear()","ng-show"=>"hasDone()"}
-                  = t("ClearCompleted")
+                  = t("trip.clearCompleted")
                   %span ({{(stuffs.length - remaining())}})
 
           .col-md-6{"ng-controller" => "tasksCtrl"}
             %header
-              %h3= t('ToDo')
+              %h3= t('trip.toDo')
             %section
               %table.table.table-hover
                 %thead
                   %tr
                     %th #
-                    %th= t("Description")
+                    %th= t("trip.description")
                   %tr
                     %td.status
                       %div{"ng-show" => "isTask()"}
                         %input#toggle-all.glyphicon.glyphicon-save{"ng-click" => "toggleMarkAll()", "ng-model" => "markAll", :type => "checkbox"}/
                     %td.text
-                      %input#new{"ng-keyup" => "addTask()", "ng-model" => "taskText", :placeholder => t("WhatTask"), :size => "30", :type => "text"}/
+                      %input#new{"ng-keyup" => "addTask()", "ng-model" => "taskText", :placeholder => t("trip.whatTask"), :size => "30", :type => "text"}/
                 %tbody{"ng-cloak" => "", "class"=>"ng-cloak"}
                   %tr{"ng-repeat" => "task in tasks.slice().reverse()", "class" => "done-{{task.status}}"}
                     %td.status
@@ -268,7 +268,7 @@
                 .todo-count
                   {{remaining()}} {{itemText()}}
                 %button.clear-completed.btn.btn-primary.btn-xs{"ng-click"=>"clear()","ng-show"=>"hasDone()"}
-                  = t("ClearCompleted")
+                  = t("trip.clearCompleted")
                   %span ({{(tasks.length - remaining())}})
   / Footer
   %section#social
@@ -279,7 +279,7 @@
         .col-md-6
           .col-md-6
             %ul.list-inline.text-right
-              %li= t("Share")
+              %li= t("trip.share")
               %li
                 = link_to share_url("facebook","http://planificaviajes.herokuapp.com/t/{{trip.key}}") do
                   %i.fa.fa-facebook-square.fa-2x

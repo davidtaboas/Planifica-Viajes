@@ -9,8 +9,8 @@
           Crea tus propias historias desde el principio
         %div{"ng-hide" => "is_login()"}
           = link_to new_user_registration_path, :method => :get do
-            %button.btn.btn-danger.btn-lg= t("Register")
+            %button.btn.btn-danger.btn-lg= t("auth.register")
         %div{"ng-show" => "is_login()"}
           - if signed_in?
             = link_to profile_path(current_user.username), :method => :get do
-              %button.btn.btn-success.btn-lg= t("AllYourTrips")
+              %button.btn.btn-success.btn-lg= t("user.allYourTrips")

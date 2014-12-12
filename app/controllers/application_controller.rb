@@ -16,13 +16,12 @@ class ApplicationController < ActionController::Base
 
   def set_metatags
 
-    set_meta_tags :site => t("Title"),
+    set_meta_tags :site => t("seo.title"),
                   :reverse => true,
-                  :description => 'Member login page.',
-                  :keywords => 'Site, Login, Members',
+                  :description => t("seo.description"),
+                  :keywords => t("seo.keywords"),
                   :canonical => "http://yoursite.com/canonical/url",
-                  :alternate => { "fr" => "http://yoursite.fr/alternate/url",
-                                  "de" => "http://yoursite.de/alternate/url" }
+                  :alternate => { "en" => "http://yoursite.fr/alternate/url" }
   end
 
   def set_locale

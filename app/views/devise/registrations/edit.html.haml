@@ -1,10 +1,10 @@
 .col-md-10.col-md-offset-1
   .col-md-6.col-md-offset-3
-    %h2= t("EditAccount")
+    %h2= t("auth.editAccount")
     = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
       = devise_error_messages!
       %div.form-group
-        = f.label t("username")
+        = f.label t("auth.username")
         %br/
         %div.input-group
           %span.input-group-addon @
@@ -17,18 +17,18 @@
         %div
           Currently waiting confirmation for: #{resource.unconfirmed_email}
       %div.form-group
-        = f.label t("password")
-        %i= t("leave_blank")
+        = f.label t("auth.password")
+        %i= t("auth.leave_blank")
         %br/
         = f.password_field :password, autocomplete: "off", :class => "form-control"
       %div.form-group
-        = f.label t("password_confirmation")
+        = f.label t("auth.password_confirmation")
         %br/
         = f.password_field :password_confirmation, autocomplete: "off", :class => "form-control"
       %div.form-group
-        = f.label t("current_password")
-        %i= t("need_your_current_password")
+        = f.label t("auth.current_password")
+        %i= t("auth.need_your_current_password")
         %br/
         = f.password_field :current_password, autocomplete: "off", :class => "form-control"
       %div.form-group
-        = f.submit t("Update"), :class => "btn btn-default"
+        = f.submit t("general.update"), :class => "btn btn-default"

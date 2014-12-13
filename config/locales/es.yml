@@ -22,9 +22,10 @@ es:
     password_confirmation: "Repetir contraseña"
     leave_blank: "(dejar en blanco si no se quiere cambiar)"
     need_your_current_password: "(Necesitamos tu contraseña actual para confirmar los cambios)"
-    update: "Actualizar"
     uditAccount: "Editar cuenta"
     errorOnLogin: "eMail y/o contraseña incorrecta/s"
+    editAccount: "Editar cuenta"
+    remember_me: "Recuérdame"
 
   # USUARIOS
   user:
@@ -82,6 +83,7 @@ es:
     save: "Guardar"
     add: "Añadir"
     close: "Cerrar"
+    update: "Actualizar"
   # CANCANCAN
   exception:
     accessdenied: "No tienes permisos para ver este viaje."

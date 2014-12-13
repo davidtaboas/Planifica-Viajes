@@ -3,14 +3,14 @@
     %h2= t("auth.login")
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       %div.form-group
-        = f.label :login
-        = f.text_field :login, :placeholder => t('username'), :class => "form-control"
+        = f.label t("auth.username")
+        = f.text_field :login, :placeholder => t('auth.username'), :class => "form-control"
       %div.form-group
-        = f.label :password
-        = f.password_field :password, autocomplete: "off", :placeholder => t('password'), :class => "form-control"
+        = f.label t("auth.password")
+        = f.password_field :password, autocomplete: "off", :placeholder => t('auth.password'), :class => "form-control"
       - if devise_mapping.rememberable?
         %div.form-group
           = f.check_box :remember_me
-          = f.label :remember_me
+          = f.label t("auth.remember_me")
       %div.form-group= f.submit t("auth.login"), :class => "btn btn-primary"
     = render "devise/shared/links"

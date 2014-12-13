@@ -1,9 +1,13 @@
 class ProfilesController < ApplicationController
   # before_action :authenticate_user!
 
-  def single
+  def show
 
-    profile = User.find_for_authentication(:username => params[:username])
+    require "awesome_print"
+
+    ap params
+
+    profile = User.find_for_authentication(:username => params[:id])
 
     set_meta_tags :title =>  profile.username
     @profile = profile
@@ -13,15 +17,18 @@ class ProfilesController < ApplicationController
 
   end
 
-  def delete
+  def destroy
 
-    @user = User.find_by(:username => params[:username])
+    require "awesome_print"
+
+    ap params
+    @user = User.find_by(:username => params[:id])
     if current_user  === @user
       sign_out current_user
       @user.destroy
     end
 
-    redirect_to "/", notice: t("AccountDeleted")
+    redirect_to "/", notice: t("user.accountDeleted")
 
   end
 end

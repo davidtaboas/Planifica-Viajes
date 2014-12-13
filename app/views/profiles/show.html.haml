@@ -6,7 +6,7 @@
         .actions
           %ul.list-inline
             %li
-              =button_to t("user.newTrip"), {controller: "trips", action: "create"}, :target => "_self", :class => "btn btn-default new", :method => :get
+              =button_to t("user.newTrip"), new_profile_trip_path(@profile), :target => "_self", :class => "btn btn-default new", :method => :get
             / Single button
             .btn-group
               %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
@@ -20,7 +20,7 @@
                     = t("user.yourAccount")
                 %li.divider
                 %li
-                  =link_to controller: "profiles", action: "delete", :target => "_self", :method => :delete do
+                  =link_to profile_path, :target => "_self", :confirm => "Are you sure you?", :method => :delete do
                     %i.fa.fa-trash-o.fa-fw
                     = t("user.deleteAccount")
       %h1= @profile.username
@@ -40,7 +40,7 @@
               %img{"src" => "#{trip.image.thumb.url}", "width" => "242", "height" => "150"}
             .info
               %h3
-                = link_to trip.title, {controller: "trips", action: "single", trip: trip.key}, :target => "_self"
+                = link_to trip.title, trip_path(trip.key), :target => "_self"
               %p.description
                 = truncate( strip_tags(trip.description), length: 140)
               %div.tripMeta
@@ -73,12 +73,12 @@
       %div.col-md-8.col-md-offset-2
         - @favorites.each do |favorite|
 
-          %section.favorite
+          %section.trip
             %a.image
               %img{"src" => "#{favorite.image.thumb.url}", "width" => "242", "height" => "150"}
             .info
               %h3
-                = link_to favorite.title, {controller: "trips", action: "single", trip: favorite.key}, :target => "_self"
+                = link_to favorite.title, trip_path(favorite.key), :target => "_self"
               %p.description
                 = truncate( strip_tags(favorite.description), length: 140)
               %div.tripMeta
@@ -110,12 +110,12 @@
       %div.col-md-8.col-md-offset-2
         - @editables.each do |editable|
 
-          %section.editable
+          %section.trip
             %a.image
               %img{"src" => "#{editable.image.thumb.url}", "width" => "242", "height" => "150"}
             .info
               %h3
-                = link_to editable.title, {controller: "trips", action: "single", trip: editable.key}, :target => "_self"
+                = link_to editable.title, trip_path(editable.key), :target => "_self"
               %p.description
                 = truncate( strip_tags(editable.description), length: 140)
               %div.tripMeta
@@ -138,5 +138,6 @@
 
                       = l(editable.endDate, :format => :trip)
           %hr
-  %div.clearfix
+  .clearfix
+
 

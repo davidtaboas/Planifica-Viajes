@@ -59,7 +59,7 @@ app.controller "tripCtrl",
         endDate: $filter('date')($scope.trip.endDate,'yyyy-MM-ddTHH:mm:ss:Z')
       }
 
-      $http.post("/api/t/"+$scope.trip.id+"/data/", info).success (data)->
+      $http.put("/api/trips/"+$scope.trip.id+"/", info).success (data)->
 
         return
 
@@ -75,7 +75,7 @@ app.controller "tripCtrl",
         endDate: $filter('date')($scope.trip.endDate,'yyyy-MM-ddTHH:mm:ss:Z')
       }
 
-      $http.post("/api/t/"+$scope.trip.id+"/data/", info).success (data)->
+      $http.put("/api/trips/"+$scope.trip.id+"/", info).success (data)->
 
         return
 
@@ -97,7 +97,7 @@ app.controller "tripCtrl",
       info = {
         visibility: value
       }
-      $http.post("/api/t/"+$scope.trip.id+"/data/", info).success (data)->
+      $http.put("/api/trips/"+$scope.trip.id+"/", info).success (data)->
         $("#sharedpreferences").fadeOut()
         $scope.trip.visibility = value
         return
@@ -108,7 +108,7 @@ app.controller "tripCtrl",
       info = {
         fav: $scope.favorite
       }
-      $http.post("/api/t/"+$scope.trip.id+"/data/", info).success (data)->
+      $http.put("/api/trips/"+$scope.trip.id+"/", info).success (data)->
 
         return
       return
@@ -117,7 +117,7 @@ app.controller "tripCtrl",
       info = {
         description: $(".content.editable").html()
       }
-      $http.post("/api/t/"+$scope.trip.id+"/data/", info).success (data)->
+      $http.put("/api/trips/"+$scope.trip.id+"/", info).success (data)->
         $(".save-description").animate
           opacity: 0
         , 500
@@ -133,7 +133,7 @@ app.controller "tripCtrl",
         title: $(".header-info h1").text()
       }
       window.document.title = info.title
-      $http.post("/api/t/"+$scope.trip.id+"/data/", info).success (data)->
+      $http.put("/api/trips/"+$scope.trip.id+"/", info).success (data)->
         $(".save-title").animate
           opacity: 0
         , 500
@@ -143,7 +143,7 @@ app.controller "tripCtrl",
 
     $scope.removeTrip = () ->
       $("#modal-delete-trip").modal('hide')
-      $http.delete("/api/t/"+$scope.trip.id+"/data/").success (data) ->
+      $http.delete("/api/trips/"+$scope.trip.id+"/").success (data) ->
         window.location.href = "/u/"+$scope.username+"/"
         return
       return
@@ -153,7 +153,7 @@ app.controller "tripCtrl",
     $scope.usersCanWrite = []
 
     $scope.getUsers = (val) ->
-      $http.get("/api/t/"+$scope.trip.id+"/users/not/" + $scope.username + "/",
+      $http.get("/api/trips/"+$scope.trip.id+"/users/" + $scope.username + "/",
         params:
           search: val
         ).then (response) ->
@@ -164,7 +164,7 @@ app.controller "tripCtrl",
 
     $scope.loadEditors = () ->
 
-      $http.get("/api/t/"+$scope.trip.id+"/editors").success (data) ->
+      $http.get("/api/trips/"+$scope.trip.id+"/users/").success (data) ->
         $scope.usersCanWrite = data
         return
 
@@ -177,7 +177,7 @@ app.controller "tripCtrl",
       info = {
         neweditor: $item
       }
-      $http.post("/api/t/"+$scope.trip.id+"/neweditor", info).success (data) ->
+      $http.post("/api/trips/"+$scope.trip.id+"/users/", info).success (data) ->
         $scope.usersCanWrite = data
         $scope.asyncSelected = ""
         return
@@ -185,10 +185,7 @@ app.controller "tripCtrl",
 
 
     $scope.deleteUserCanWrite = (user_id) ->
-      info = {
-          oldeditor: user_id
-      }
-      $http.post("/api/t/"+$scope.trip.id+"/deleditor", info).success (data) ->
+      $http.delete("/api/trips/"+$scope.trip.id+"/users/"+user_id+"/").success (data) ->
           $scope.usersCanWrite = data
           return
       return
@@ -208,7 +205,7 @@ app.controller "mapCtrl",
 
 
     getDestinations = ->
-      $http.get("/api/t/"+$scope.trip.id+"/dest/").success (data) ->
+      $http.get("/api/trips/"+$scope.trip.id+"/places/").success (data) ->
         $scope.destinations = data
         createPolyline()
         return
@@ -224,7 +221,7 @@ app.controller "mapCtrl",
         info = {
           dests: $scope.destinations
         }
-        $http.post("/api/t/"+$scope.trip.id+"/dest", info).success (data) ->
+        $http.post("/api/trips/"+$scope.trip.id+"/places/", info).success (data) ->
           return
 
       return
@@ -492,9 +489,8 @@ app.controller "budgetCtrl",
 
 
     getBudgets = ->
-      $http.get("/api/t/"+$scope.trip.id+"/budgets/").success (data) ->
+      $http.get("/api/trips/"+$scope.trip.id+"/budgets/").success (data) ->
         $scope.budgets = data
-        console.log data
         return
 
       return
@@ -513,7 +509,7 @@ app.controller "budgetCtrl",
       }
 
 
-      $http.post("/api/t/"+$scope.trip.id+"/budgets/", budget).success (data) ->
+      $http.post("/api/trips/"+$scope.trip.id+"/budgets/", budget).success (data) ->
         getBudgets()
         $scope.newbudget = []
         $scope.newbudget.priceperunit = 0
@@ -523,7 +519,7 @@ app.controller "budgetCtrl",
       return
 
     $scope.removeBudget = (item) ->
-      $http.delete("/api/t/"+$scope.trip.id+"/budgets/", {params: {item: item.id}}).success (data) ->
+      $http.delete("/api/trips/"+$scope.trip.id+"/budgets/"+item.id+"/").success (data) ->
         index = $scope.budgets.indexOf(item)
         $scope.budgets.splice(index, 1)
         return
@@ -537,7 +533,7 @@ app.controller "budgetCtrl",
         units: item.units
         priceperunit: item.priceperunit
       }
-      $http.post("/api/t/"+$scope.trip.id+"/budgets/"+item.id, modbudget).success (data) ->
+      $http.put("/api/trips/"+$scope.trip.id+"/budgets/"+item.id+"/", modbudget).success (data) ->
 
         return
       return
@@ -621,7 +617,7 @@ app.controller "stuffsCtrl",
 
 
     getStuffs = ->
-      $http.get("/api/t/"+$scope.trip.id+"/items/stuffs").success (data) ->
+      $http.get("/api/trips/"+$scope.trip.id+"/items/?type=stuffs").success (data) ->
         $scope.stuffs = data
         return
 
@@ -645,9 +641,10 @@ app.controller "stuffsCtrl",
     $scope.addStuff = ->
       if event.keyCode is 13 and $scope.stuffText
         data = {
+          type: "stuff"
           description: $scope.stuffText
         }
-        $http.post("/api/t/"+$scope.trip.id+"/items/stuff/", data).success (data) ->
+        $http.post("/api/trips/"+$scope.trip.id+"/items/", data).success (data) ->
           getStuffs()
           $scope.stuffText = ""
           return
@@ -656,7 +653,7 @@ app.controller "stuffsCtrl",
 
     modStuff = (todo) ->
       $scope.toggleEditMode(todo)
-      $http.post("/api/t/"+$scope.trip.id+"/items/stuff/", todo).success (data) ->
+      $http.put("/api/trips/"+$scope.trip.id+"/items/"+todo.id+"/", todo).success (data) ->
         getStuffs()
         return
       return
@@ -677,7 +674,7 @@ app.controller "stuffsCtrl",
       return
 
     $scope.changeStatus = (todo) ->
-      $http.post("/api/t/"+$scope.trip.id+"/items/stuff/", todo).success (data) ->
+      $http.put("/api/trips/"+$scope.trip.id+"/items/"+todo.id+"/", todo).success (data) ->
         return
       statusAll()
       return
@@ -711,7 +708,7 @@ app.controller "stuffsCtrl",
       return
 
     $scope.removeItem = (todo) ->
-      $http.delete("/api/t/"+$scope.trip.id+"/items/stuff/", {params: {item: todo.id}}).success (data) ->
+      $http.delete("/api/trips/"+$scope.trip.id+"/items/"+todo.id+"/").success (data) ->
         index = $scope.stuffs.indexOf(todo)
         $scope.stuffs.splice(index, 1)
         return
@@ -737,7 +734,7 @@ app.controller "tasksCtrl",
 
 
     getTasks = ->
-      $http.get("/api/t/"+$scope.trip.id+"/items/tasks").success (data) ->
+      $http.get("/api/trips/"+$scope.trip.id+"/items/?type=tasks").success (data) ->
         $scope.tasks = data
         return
 
@@ -761,9 +758,10 @@ app.controller "tasksCtrl",
     $scope.addTask = ->
       if event.keyCode is 13 and $scope.taskText
         data = {
+          type: "task"
           description: $scope.taskText
         }
-        $http.post("/api/t/"+$scope.trip.id+"/items/task/", data).success (data) ->
+        $http.post("/api/trips/"+$scope.trip.id+"/items/", data).success (data) ->
           getTasks()
           $scope.taskText = ""
           return
@@ -772,7 +770,7 @@ app.controller "tasksCtrl",
 
     modTask = (todo) ->
       $scope.toggleEditMode(todo)
-      $http.post("/api/t/"+$scope.trip.id+"/items/task/", todo).success (data) ->
+      $http.put("/api/trips/"+$scope.trip.id+"/items/"+todo.id+"/", todo).success (data) ->
         getTasks()
         return
       return
@@ -793,7 +791,7 @@ app.controller "tasksCtrl",
       return
 
     $scope.changeStatus = (todo) ->
-      $http.post("/api/t/"+$scope.trip.id+"/items/task/", todo).success (data) ->
+      $http.put("/api/trips/"+$scope.trip.id+"/items/"+todo.id+"/", todo).success (data) ->
         return
       statusAll()
       return
@@ -827,7 +825,7 @@ app.controller "tasksCtrl",
       return
 
     $scope.removeItem = (todo) ->
-      $http.delete("/api/t/"+$scope.trip.id+"/items/task/", {params: {item: todo.id}}).success (data) ->
+      $http.delete("/api/trips/"+$scope.trip.id+"/items/"+todo.id+"/").success (data) ->
         index = $scope.tasks.indexOf(todo)
         $scope.tasks.splice(index, 1)
         return

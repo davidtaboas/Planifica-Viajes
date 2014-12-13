@@ -11,12 +11,12 @@
         .modal-footer
           %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t("general.cancel")
           %button.btn.btn-primary#confirm-delete-trip{:type => "button", "ng-click" => "removeTrip()"}= t("general.accept")
-  .uploader{"nv-file-drop"=>"", "uploader"=>"uploader", "options" => "{url: '/api/t/{{trip.id}}/data/image' }"}
+  .uploader{"nv-file-drop"=>"", "uploader"=>"uploader", "options" => "{url: '/api/trips/{{trip.id}}/image/' }"}
     .box-center
       .box-info
         .show-info
           %h3= t("trip.dragImageHere")
-          %input.btn.btn-info{"nv-file-select"=>"","uploader"=>"uploader","type"=>"file", "options" => "{url: '/api/t/{{trip.id}}/data/image' }"}
+          %input.btn.btn-info{"nv-file-select"=>"","uploader"=>"uploader","type"=>"file", "options" => "{url: '/api/trips/{{trip.id}}/image/' }"}
           %button.btn.btn-danger.cancel= t("general.cancel")
   .user-management
     .box-center

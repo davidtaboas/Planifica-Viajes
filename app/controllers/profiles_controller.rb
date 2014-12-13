@@ -3,9 +3,6 @@ class ProfilesController < ApplicationController
 
   def show
 
-    require "awesome_print"
-
-    ap params
 
     profile = User.find_for_authentication(:username => params[:id])
 

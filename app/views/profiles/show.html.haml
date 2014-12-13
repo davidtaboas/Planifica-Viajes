@@ -20,7 +20,7 @@
                     = t("user.yourAccount")
                 %li.divider
                 %li
-                  =link_to profile_path, :target => "_self", :confirm => "Are you sure you?", :method => :delete do
+                  =link_to profile_path, :target => "_self", :data => {:confirm => t("user.removeAccount")}, :method => :delete do
                     %i.fa.fa-trash-o.fa-fw
                     = t("user.deleteAccount")
       %h1= @profile.username

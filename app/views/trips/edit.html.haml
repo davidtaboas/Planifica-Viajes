@@ -1,16 +1,4 @@
 #trip{"ng-controller" => "tripCtrl", "ng-init" => "trip = #{@trip}"}
-  #modal-delete-trip.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "modal-delete-title", :role => "dialog", :tabindex => "-1"}
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button.close{"data-dismiss" => "modal", :type => "button"}
-            %span{"aria-hidden" => "true"} ×
-            %span.sr-only Close
-          %h4#modal-delete-title.modal-title= t("trip.deleteTripTitle")
-        .modal-body= t("trip.areYouSure?")
-        .modal-footer
-          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t("general.cancel")
-          %button.btn.btn-primary#confirm-delete-trip{:type => "button", "ng-click" => "removeTrip()"}= t("general.accept")
   .uploader{"nv-file-drop"=>"", "uploader"=>"uploader", "options" => "{url: '/api/trips/{{trip.id}}/image/' }"}
     .box-center
       .box-info
@@ -73,9 +61,12 @@
               %a.edit-users{"ng-click" => "loadEditors()"}
                 %i.fa.fa-group.fa-fw
                 = t("trip.manageUsers")
-              %a.delete-trip{"data-target" => "#modal-delete-trip", "data-toggle" => "modal", :type => "button"}
+              = link_to trip_path, :method => "delete", :data => {:confirm => t('trip.deleteTrip')} do
                 %i.fa.fa-remove.fa-fw
                 = t("trip.deleteTrip")
+              / %a.delete-trip{"data-target" => "#modal-delete-trip", "data-toggle" => "modal", :type => "button"}
+              /   %i.fa.fa-remove.fa-fw
+              /   = t("trip.deleteTrip")
       .clear
 
       .sharedkey

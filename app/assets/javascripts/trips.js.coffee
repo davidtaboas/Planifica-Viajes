@@ -141,13 +141,6 @@ app.controller "tripCtrl",
         return
       return
 
-    $scope.removeTrip = () ->
-      $("#modal-delete-trip").modal('hide')
-      $http.delete("/api/trips/"+$scope.trip.id+"/").success (data) ->
-        window.location.href = "/u/"+$scope.username+"/"
-        return
-      return
-
 
     $scope.allUsers = []
     $scope.usersCanWrite = []
@@ -456,10 +449,10 @@ app.controller "budgetCtrl",
 
 
     $scope.categories = [
-      {name: I18n.t('transport'), color:'danger',id: 1},
-      {name: I18n.t('food'), color:'success', id: 2},
-      {name: I18n.t('sleep'), color:'primary', id: 3},
-      {name: I18n.t('others'), color:'warning', id: 4}
+      {name: I18n.t('trip.transport'), color:'danger',id: 1},
+      {name: I18n.t('trip.food'), color:'success', id: 2},
+      {name: I18n.t('trip.sleep'), color:'primary', id: 3},
+      {name: I18n.t('trip.others'), color:'warning', id: 4}
     ]
     transport = {}
     food = {}
@@ -557,7 +550,7 @@ app.controller "budgetCtrl",
 
       #Title configuration (optional)
       title:
-        text: I18n.t("budget_distribution")
+        text: I18n.t("trip.budget_distribution")
 
       #Boolean to control showng loading status on chart (optional)
       loading: false
@@ -590,10 +583,10 @@ app.controller "budgetCtrl",
         others = $scope.budgets.filter(isOthers)
 
         aux = []
-        aux.push({name: I18n.t("transport"),y: getTotalCategory(transport),color: "#d9534f"})
-        aux.push({name: I18n.t("food"),y: getTotalCategory(food),color: "#5cb85c"})
-        aux.push({name: I18n.t("sleep"),y: getTotalCategory(sleep),color: "#428bca"})
-        aux.push({name: I18n.t("others"),y: getTotalCategory(others),color: "#f0ad4e"})
+        aux.push({name: I18n.t("trip.transport"),y: getTotalCategory(transport),color: "#d9534f"})
+        aux.push({name: I18n.t("trip.food"),y: getTotalCategory(food),color: "#5cb85c"})
+        aux.push({name: I18n.t("trip.sleep"),y: getTotalCategory(sleep),color: "#428bca"})
+        aux.push({name: I18n.t("trip.others"),y: getTotalCategory(others),color: "#f0ad4e"})
         $scope.highchartsNgConfig.series = []
         $scope.highchartsNgConfig.series.push name: "€", data: aux
 
@@ -691,7 +684,7 @@ app.controller "stuffsCtrl",
       $scope.stuffs.length isnt $scope.remaining()
 
     $scope.itemText = ->
-      (if ($scope.stuffs.length - $scope.remaining() == 1) then I18n.t("leftstuff") else I18n.t("leftstuffs"))
+      (if ($scope.stuffs.length - $scope.remaining() == 1) then I18n.t("trip.leftstuff") else I18n.t("trip.leftstuffs"))
 
     $scope.toggleMarkAll = ->
       if $scope.remaining() is 0
@@ -808,7 +801,7 @@ app.controller "tasksCtrl",
       $scope.tasks.length isnt $scope.remaining()
 
     $scope.itemText = ->
-      (if ($scope.tasks.length - $scope.remaining() == 1) then I18n.t("lefttask") else I18n.t("lefttasks"))
+      (if ($scope.tasks.length - $scope.remaining() == 1) then I18n.t("trip.lefttask") else I18n.t("trip.lefttasks"))
 
     $scope.toggleMarkAll = ->
       if $scope.remaining() is 0

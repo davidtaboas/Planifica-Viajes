@@ -58,5 +58,13 @@ class TripsController < ApplicationController
     redirect_to trip_url(trip.key)
   end
 
+  def destroy
+    trip = Trip.find_by(:key => params[:id])
+    trip.destroy
+
+    redirect_to profile_path(current_user.username), :alert => "Viaje eliminado"
+
+  end
+
 
 end

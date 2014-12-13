@@ -38,6 +38,7 @@ es:
     deleteAccount: "Eliminar cuenta"
     newTrip: "Nuevo viaje"
     accountDeleted: "Cuenta eliminada"
+    removeAccount: "Eliminar tu cuenta"
   # VIAJE
   trip:
     tempTitle: "Viaje"
@@ -56,7 +57,6 @@ es:
     sleep: "Alojamiento"
     others: "Otros"
     budget_distribution: "Distribución de presupuesto"
-    areYouSure?: "¿Estás seguro de eliminar esta planificación?"
     dragImageHere: "Arrastra una imagen hasta aquí"
     deleteTrip: "Eliminar viaje"
     manageUsers: "Gestionar Usuarios"
@@ -84,6 +84,9 @@ es:
     add: "Añadir"
     close: "Cerrar"
     update: "Actualizar"
+    yesSure: "Sí, estoy seguro."
+    noTurningBack: "No hay vuelta atrás."
+    sure: "¿Estás seguro?"
   # CANCANCAN
   exception:
     accessdenied: "No tienes permisos para ver este viaje."

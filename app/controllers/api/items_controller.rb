@@ -4,13 +4,15 @@ class Api::ItemsController < ApplicationController
 
     trip = Trip.find(params[:trip_id])
 
-    items = trip.items
-
     if params[:type] == "stuffs"
-      items   = items.select { |key| key["cat"] == "material" }
+      cat   = "material"
     elsif params[:type] == "tasks"
-      items    = items.select { |key| key["cat"] == "todo" }
+      cat = "todo"
     end
+
+
+    items = trip.items.where(:cat => "#{cat}").order("created_at ASC")
+
 
      render json: items.to_json
   end

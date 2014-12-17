@@ -207,7 +207,7 @@
                     %td.text
                       %input#new{"ng-keyup" => "addStuff()", "ng-model" => "stuffText", :placeholder => t("trip.whatStuff"), :size => "30", :type => "text"}/
                 %tbody{"ng-cloak" => "", "class"=>"ng-cloak"}
-                  %tr{"ng-repeat" => "stuff in stuffs.slice().reverse()", "class" => "done-{{stuff.status}}"}
+                  %tr{"ng-repeat" => "stuff in stuffs", "class" => "done-{{stuff.status}}"}
                     %td.status
                       %input.glyphicon.glyphicon-ok{"type" => "checkbox", "ng-model"=>"stuff.status", "ng-click" => "changeStatus(stuff)"}
                     %td.text{"ng-keyup"=>"editTodo()"}
@@ -243,7 +243,7 @@
                     %td.text
                       %input#new{"ng-keyup" => "addTask()", "ng-model" => "taskText", :placeholder => t("trip.whatTask"), :size => "30", :type => "text"}/
                 %tbody{"ng-cloak" => "", "class"=>"ng-cloak"}
-                  %tr{"ng-repeat" => "task in tasks.slice().reverse()", "class" => "done-{{task.status}}"}
+                  %tr{"ng-repeat" => "task in tasks", "class" => "done-{{task.status}}"}
                     %td.status
                       %input.glyphicon.glyphicon-ok{"type" => "checkbox", "ng-model"=>"task.status", "ng-click" => "changeStatus(task)"}
                     %td.text{"ng-keyup"=>"editTodo()"}

@@ -11,7 +11,7 @@ gem 'sass', '3.2.19'
 gem 'compass', '~> 0.12.7'
 gem "sprockets", "2.11.0"
 gem 'sass-rails'
-gem 'autoprefixer-rails'
+# gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
 gem 'compass-rails', '~> 1.1.7'
 

@@ -17,7 +17,6 @@
 # = require angular-route
 # = require angular-resource
 # = require angular-sanitize
-# = require angular-devise
 # = require bootstrap-sprockets
 # = require_tree .
 
@@ -68,70 +67,21 @@ $.rails.allowAction = (element) ->
   # Prevent the original link from working
   return false
 
-app = angular.module("PlanificaViajes", ["Devise", "PlanificaViajes.Trips"])
+app = angular.module("PlanificaViajes", ["PlanificaViajes.Trips"])
 
 
 
-app.config (AuthProvider) ->
-  AuthProvider.loginPath "/auth/login.json"
-  AuthProvider.logoutPath "/auth/logout.json"
-  AuthProvider.registerPath "/auth/register/new.json"
-  AuthProvider.interceptAuth true
 
-
-
-  return
 
 app.controller "login",
-  ($scope, Auth, $http) ->
+  ($scope, $http) ->
 
-    errorOnLogin = false
-    $scope.errorOnLogin = () ->
 
-      return errorOnLogin
-
-    $scope.formInfo = {}
-
-    $scope.is_login = ->
-      Auth.isAuthenticated()
-
-    Auth.currentUser().then ((user) ->
-      $scope.username = user.username
-      return
-    ), (error) ->
-      return
-
-    $scope.logout = (form) ->
-      Auth.logout().then ((oldUser) ->
-        location.reload()
-        return
-      ), (error) ->
-        console.log "Error logout"
-        return
-
-      return
-
-    $scope.login = () ->
-
-      credentials =
-        login: $scope.formInfo.email
-        password: $scope.formInfo.password
-
-      Auth.login(credentials).then ((user) ->
-        $scope.username = user.username
-        location.reload()
-        return
-      ), (error) ->
-        console.log "Credenciales no válidas"
-        errorOnLogin = true
-        $(".control-label").show()
-        return
 
       return
 
 $ ->
 
-  $(".navHome button").on "click", ->
-    $("body").toggleClass "is-activeNav"
+
 
   return

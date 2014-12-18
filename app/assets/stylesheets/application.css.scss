@@ -36,61 +36,11 @@ a {
   }
 }
 
-nav.siteNav {
-  position: fixed;
-  outline: none;
-  top: 0;
-  left: -280px;
-  border: none;
-  z-index: 1;
-  .navbar{
-    width: 280px;
-    border-radius: 0px;
-    height: 100vh;
-    border: none;
+nav.meta-nav {
 
-    form{
-      background: #fff;
-      width: 100%;
-      margin: 0 auto;
-      padding: 10px;
-      border-radius: 12px;
-      a{
-        color: #666;
-        &:hover{
-          color: #333
-        }
-      }
-      .login-true{
-        h4{
-          display: inline;
-          vertical-align: middle;
-        }
-        button{
-          text-align: right;
-        }
-      }
-      .form-group{
-        width: 100%;
-        .control-label{
-          display: none;
-        }
-        input{
-          width: 100%;
-          margin: 10px 0;
-          &[type="password"]{
-            width: 70%;
-          }
-        }
-      }
-      .register{
 
-        a{
-          color: $brand-primary;
-        }
-      }
-
-    }
+  a.dropdown-toggle{
+    padding: 6px !important;
   }
 }
 

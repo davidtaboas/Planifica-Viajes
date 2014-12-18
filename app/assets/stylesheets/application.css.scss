@@ -15,6 +15,8 @@
 
 $link-color: rgba(0,0,0,0.6);
 $link-hover-color: rgba(0,0,0,0.8);
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+
 @import "compass";
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -24,6 +26,10 @@ $link-hover-color: rgba(0,0,0,0.8);
 @import "trips";
 
 
+.web-title{
+  font-family: "Lobster";
+  font-size: 2em;
+}
 
 // Usage
 a {

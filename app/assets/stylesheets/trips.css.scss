@@ -16,15 +16,11 @@
 
 .meta-trip {
 
-  .navbar{
 
-    width: 100%;
-
-    .navbar-nav{
-      margin-top: 6px;
-    }
-
+  .navbar-nav{
+    margin-top: 6px;
   }
+
 
 
 
@@ -43,7 +39,7 @@
     left: 0;
     background: #efefef;
     opacity: 0.9;
-    position: absolute;
+    position: fixed;
     z-index: 100000;
 
     .box-center{

@@ -12,7 +12,7 @@
       I18n.locale = "#{I18n.locale}";
       moment.locale(I18n.locale);
     = csrf_meta_tags
-  %body{"ng-app" => "PlanificaViajes"}
+  %body{"ng-app" => "PlanificaViajes", "ng-controller" => "login as auth"}
 
     %nav.meta-nav
       .navbar.nomargin{:role => "navigation"}
@@ -27,8 +27,8 @@
           .navbar-collapse.collapse{}
             -if signed_in?
               %ul.nav.navbar-nav.navbar-right
-                / %li
-                /   %a{:href => "#"} Link
+                %li
+                  %a{:href => "#"} Link
                 %li.dropdown
                   %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
                     %span.fa-stack.fa-lg
@@ -88,5 +88,10 @@
           %span{"aria-hidden" => "true"} ×
           %span.sr-only Close
         %strong= alert
-    =yield
-    %footer#end
+    .container-fluid#site
+      .page
+        =yield
+        %footer#end
+
+      / /container
+

@@ -1,4 +1,4 @@
-#trip{"ng-controller" => "tripCtrl", "ng-init" => "trip = #{@trip.to_json.html_safe}"}
+#trip{"ng-controller" => "tripCtrl", "ng-init" => "trip = #{@trip}"}
   .uploader{"nv-file-drop"=>"", "uploader"=>"uploader", "options" => "{url: '/api/trips/{{trip.id}}/image/' }"}
     .box-center
       .box-info
@@ -29,6 +29,51 @@
 
           %button.btn.btn-danger.cancel= t("general.close")
   %section#header{"data-speed" => "6", "data-type" => "background", "ng-style" => "tripBackground"}
+    %nav.settings
+      - if current_user
+        %button.btn.btn-default.favorite{"ng-init" => "favorite = #{@favorite}", "ng-click" => "toggleFavorite()"}
+          %i.fa.fa-heart.fa-2x{"ng-show" => "favorite"}
+          %i.fa.fa-heart-o.fa-2x{"ng-hide" => "favorite"}
+      .btn-group
+        %button.btn.btn-default{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
+          %i.fa.fa-globe.fa-2x{"ng-show" => "trip.visibility == 'public'"}
+          %i.fa.fa-eye.fa-2x{"ng-show" => "trip.visibility == 'shared'"}
+          %i.fa.fa-eye-slash.fa-2x{"ng-show" => "trip.visibility == 'private'"}
+        %ul.dropdown-menu.dropdown-menu-right{:role => "menu"}
+          %li
+            %a{"ng-click" => "changeVisibility('public')"}
+              %i.fa.fa-globe
+              = t("trip.public")
+            %a{"ng-click" => "changeVisibility('shared')"}
+              %i.fa.fa-eye
+              = t("trip.shared")
+            %a{"ng-click" => "changeVisibility('private')"}
+              %i.fa.fa-eye-slash
+              = t("trip.private")
+      %button.btn.btn-default.change-image
+        %i.fa.fa-photo.fa-2x{}
+      - if can? :destroy, Trip
+        .btn-group
+          %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
+            %i.fa.fa-cogs.fa-fw
+          %ul.dropdown-menu.dropdown-menu-right{:role => "menu"}
+            %li
+              %a.edit-users{"ng-click" => "loadEditors()"}
+                %i.fa.fa-group.fa-fw
+                = t("trip.manageUsers")
+              = link_to trip_path, :method => "delete", :data => {:confirm => t('trip.deleteTrip')} do
+                %i.fa.fa-remove.fa-fw
+                = t("trip.deleteTrip")
+              / %a.delete-trip{"data-target" => "#modal-delete-trip", "data-toggle" => "modal", :type => "button"}
+              /   %i.fa.fa-remove.fa-fw
+              /   = t("trip.deleteTrip")
+      .clear
+
+      .sharedkey
+        .input-group.input-group-sm{"ng-hide" => "trip.visibility == 'private'", "ng-cloak" => "", "class"=>"ng-cloak"}
+          %span.input-group-addon
+            %i.fa.fa-link.fa-fw
+          %input.form-control{:placeholder => "Username", :type => "text", "value"=>"{{sharedUrl}}", "onClick"=>"this.select();"}/
     .container-fluid.header-info
       %h1.editable{"ng-model" => "trip.title", "ng-cloak" => "", "class"=>"ng-cloak"}
         {{trip.title}}
@@ -237,82 +282,3 @@
               %span.input-group-addon
                 %i.fa.fa-link.fa-fw
               %input.form-control{:placeholder => "Username", :type => "text", "value"=>"{{sharedUrl}}", "onClick"=>"this.select();"}/
-  %nav.meta-trip
-    .navbar.navbar-default.navbar-fixed-bottom{:role => "navigation"}
-      .container-fluid
-        .navbar-header
-          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
-            %span.sr-only Toggle navigation
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          - author = @trip.author_by_name
-          =link_to author, profile_path(author), :class => "navbar-brand"
-        .navbar-collapse.collapse{}
-          %ul.nav.navbar-nav.navbar-right
-            - if signed_in?
-              %li
-
-                %a.favorite{"ng-init" => "favorite = #{@favorite}", "ng-click" => "toggleFavorite()"}
-                  %span.fa-stack.fa-lg
-                    %i.fa.fa-square-o.fa-stack-2x
-
-                    %i.fa.fa-heart.fa-stack-1x{"ng-show" => "favorite"}
-                    %i.fa.fa-heart-o.fa-stack-1x{"ng-hide" => "favorite"}
-            %li
-              .btn-group.dropup
-                %a{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
-                  %span.fa-stack.fa-lg
-                    %i.fa.fa-square-o.fa-stack-2x
-                    %i.fa.fa-arrow-up.fa-stack-1x
-                %ul.dropdown-menu.dropdown-menu-right{:role => "menu"}
-                  %li
-                    = link_to share_url("facebook","http://planificaviajes.herokuapp.com/t/{{trip.key}}") do
-                      %i.fa.fa-facebook-square.fa-2x
-                      Facebook
-                    = link_to share_url("twitter","http://planificaviajes.herokuapp.com/t/{{trip.key}}") do
-                      %i.fa.fa-twitter-square.fa-2x
-                      Twitter
-
-            - if can? :destroy, Trip
-              %li
-                .btn-group.dropup
-                  %a{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
-                    %span.fa-stack.fa-lg
-                      %i.fa.fa-circle.fa-stack-2x
-                      %i.fa.fa-globe.fa-stack-1x.fa-inverse{"ng-show" => "trip.visibility == 'public'"}
-                      %i.fa.fa-eye.fa-stack-1x.fa-inverse{"ng-show" => "trip.visibility == 'shared'"}
-                      %i.fa.fa-eye-slash.fa-stack-1x.fa-inverse{"ng-show" => "trip.visibility == 'private'"}
-
-                  %ul.dropdown-menu.dropdown-menu-right{:role => "menu"}
-                    %li
-                      %a{"ng-click" => "changeVisibility('public')"}
-                        %i.fa.fa-globe
-                        = t("trip.public")
-                      %a{"ng-click" => "changeVisibility('shared')"}
-                        %i.fa.fa-eye
-                        = t("trip.shared")
-                      %a{"ng-click" => "changeVisibility('private')"}
-                        %i.fa.fa-eye-slash
-                        = t("trip.private")
-              %li
-                .btn-group.dropup
-                  %a.change-image
-                    %span.fa-stack.fa-lg
-                      %i.fa.fa-circle.fa-stack-2x
-                      %i.fa.fa-photo.fa-stack-1x.fa-inverse
-              %li
-                .btn-group.dropup
-                  %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
-                    %span.fa-stack.fa-lg
-                      %i.fa.fa-circle.fa-stack-2x
-                      %i.fa.fa-cogs.fa-stack-1x.fa-inverse
-
-                  %ul.dropdown-menu.dropdown-menu-right{:role => "menu"}
-                    %li
-                      %a.edit-users{"ng-click" => "loadEditors()"}
-                        %i.fa.fa-group.fa-fw
-                        = t("trip.manageUsers")
-                      = link_to trip_path, :method => "delete", :data => {:confirm => t('trip.deleteTrip')} do
-                        %i.fa.fa-remove.fa-fw
-                        = t("trip.deleteTrip")

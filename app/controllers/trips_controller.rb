@@ -9,7 +9,8 @@ class TripsController < ApplicationController
 
     set_meta_tags :title => trip.title
 
-    @trip = trip
+    @trip = trip.to_json
+
     @favorite = trip.marked_as? :favorite, :by => current_user
 
     if can? :write, trip
@@ -32,7 +33,8 @@ class TripsController < ApplicationController
 
     set_meta_tags :title => trip.title
 
-    @trip = trip
+    @trip = trip.to_json
+
     @favorite = trip.marked_as? :favorite, :by => current_user
 
     if cannot? :write, trip

@@ -8,7 +8,7 @@ es:
   # ERRORES
   err:
     serverError:
-      title:"Hemos perdido el norte"
+      title: "Hemos perdido el norte"
       text: "Ha ocurrido un error en nuestros servidores. Trabajamos para que puedas volver a organizar tu viaje cuanto antes."
     notFound:
       title: "Vuelo 404 perdido"

@@ -250,10 +250,10 @@
                   %i.fa.fa-arrow-up.fa-stack-1x
               %ul.dropdown-menu.dropdown-menu-right{:role => "menu"}
                 %li
-                  = link_to share_url("facebook","http://planificaviajes.herokuapp.com/t/{{trip.key}}") do
+                  = link_to share_url("facebook",@trip.key) do
                     %i.fa.fa-facebook-square.fa-2x
                     Facebook
-                  = link_to share_url("twitter","http://planificaviajes.herokuapp.com/t/{{trip.key}}") do
+                  = link_to share_url("twitter",@trip.key) do
                     %i.fa.fa-twitter-square.fa-2x
                     Twitter
 

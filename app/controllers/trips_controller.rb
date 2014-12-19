@@ -1,23 +1,30 @@
 class TripsController < ApplicationController
 
-
+  before_filter :set_trip, only: [:show, :edit]
   # before_filter :logged_in
+
+  def set_trip
+    @trip = Trip.find_by(:key => params[:id])
+
+    set_meta_tags :title => @trip.title
+    set_meta_tags :og => {
+      :title    => @trip.title,
+      :type     => 'article',
+      :url      => "#{trip_url(@trip.key)}",
+      :image    => @trip.image.url
+    }
+    @favorite = @trip.marked_as? :favorite, :by => current_user
+  end
+
 
   def show
 
-    trip = Trip.find_by(:key => params[:id])
-
-    set_meta_tags :title => trip.title
-
-    @trip = trip
-    @favorite = trip.marked_as? :favorite, :by => current_user
-
-    if can? :write, trip
-      redirect_to edit_trip_path(trip.key)
-    elsif cannot? :read, trip
+    if can? :write, @trip
+      redirect_to edit_trip_path(@trip.key)
+    elsif cannot? :read, @trip
 
       if user_signed_in?
-        authorize! :read, trip
+        authorize! :read, @trip
       else
         authenticate_user!
       end
@@ -28,18 +35,11 @@ class TripsController < ApplicationController
 
   def edit
 
-    trip = Trip.find_by(:key => params[:id])
-
-    set_meta_tags :title => trip.title
-
-    @trip = trip
-    @favorite = trip.marked_as? :favorite, :by => current_user
-
-    if cannot? :write, trip
+    if cannot? :write, @trip
       # como no puedo escribir, compruebo si estoy identificado
       if user_signed_in?
         # si estoy logueado pido autorización para editar
-        authorize! :write, trip
+        authorize! :write, @trip
       else
         # si no estoy identificado, lo tengo que estar!
         authenticate_user!

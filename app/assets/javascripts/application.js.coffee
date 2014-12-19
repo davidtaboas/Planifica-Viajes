@@ -68,20 +68,3 @@ $.rails.allowAction = (element) ->
   return false
 
 app = angular.module("PlanificaViajes", ["PlanificaViajes.Trips"])
-
-
-
-
-
-app.controller "login",
-  ($scope, $http) ->
-
-
-
-      return
-
-$ ->
-
-
-
-  return

@@ -1,4 +1,7 @@
-#404
+#not-found
   .col-md-6.col-md-offset-3
-    %h1 Errors#file_not_found
-    %p Find me in app/views/errors/file_not_found.html.erb
+
+    %h1= t("err.notFound.title")
+    %p.alert.alert-danger
+      %span.label.label-danger 404
+      = t("err.notFound.text").html_safe

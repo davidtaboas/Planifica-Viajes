@@ -5,6 +5,11 @@ es:
     keywords: "planifica viajes, preparar viaje, borrador viaje"
   web:
     copyright: "Una aplicación realizada por David Táboas"
+  # ERRORES
+  err:
+    notFound:
+      title: "Vuelo 404 perdido"
+      text: 'No encontramos lo que estabas buscando. Puedes <a class="alert-link" href="/">volver a la página de inicio</a> y empezar de nuevo.'
   # AUTH
   auth:
     sign_in: "Entrar"

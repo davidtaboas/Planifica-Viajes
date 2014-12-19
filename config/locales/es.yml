@@ -7,6 +7,9 @@ es:
     copyright: "Una aplicación realizada por David Táboas"
   # ERRORES
   err:
+    serverError:
+      title:"Hemos perdido el norte"
+      text: 'Ha ocurrido un error en nuestros servidores. Trabajamos para que puedas volver a organizar tu viaje cuanto antes.'
     notFound:
       title: "Vuelo 404 perdido"
       text: 'No encontramos lo que estabas buscando. Puedes <a class="alert-link" href="/">volver a la página de inicio</a> y empezar de nuevo.'

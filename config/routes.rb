@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /es/ do
     get '/funcionalidades' => 'pages#features'
     get '/contacto' => 'pages#contact'
+    get '/teayudamos' => 'pages#help'
   end
 
   # devise_for :users

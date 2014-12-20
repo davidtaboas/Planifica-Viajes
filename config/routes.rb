@@ -3,13 +3,15 @@ Rails.application.routes.draw do
 
 
   root 'home#index'
+  get '/home', to: 'home#show', as: "home"
 
   # páginas
   scope "(:locale)", locale: /es/ do
-    get '/funcionalidades' => 'pages#features'
-    get '/contacto' => 'pages#contact'
-    get '/teayudamos' => 'pages#help'
+    get '/funcionalidades' => 'pages#features', as: "features"
+    get '/contacto' => 'pages#contact', as: "contact"
+    get '/teayudamos' => 'pages#help', as: "help"
   end
+
 
   # devise_for :users
   devise_for :users, path: "auth", path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'new' }

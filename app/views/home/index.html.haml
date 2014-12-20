@@ -14,3 +14,27 @@
         - else
           = link_to profile_path(current_user.username), :method => :get do
             %button.btn.btn-success.btn-lg= t("user.allYourTrips")
+.container-fluid.bs-home
+  .row
+    .col-sm-4
+      %p.symbol
+        %span.fa-stack.fa-5x
+          %i.fa.fa-square-o.fa-stack-2x
+          %i.fa.fa-globe.fa-stack-1x
+      %h3= t("home.route.title")
+      %p= t("home.route.text")
+
+    .col-sm-4
+      %p.symbol
+        %span.fa-stack.fa-5x
+          %i.fa.fa-square-o.fa-stack-2x
+          %i.fa.fa-bank.fa-stack-1x
+      %h3= t("home.budget.title")
+      %p= t("home.budget.text")
+    .col-sm-4
+      %p.symbol
+        %span.fa-stack.fa-5x
+          %i.fa.fa-square-o.fa-stack-2x
+          %i.fa.fa-check.fa-stack-1x
+      %h3= t("home.stuff.title")
+      %p= t("home.stuff.text")

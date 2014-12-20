@@ -3,8 +3,26 @@ es:
     title: "Planifica Viajes"
     description: "Planifica viajes desde el principio, con tu ruta, presupuesto, inventario y tareas."
     keywords: "planifica viajes, preparar viaje, borrador viaje"
+    features: "Funcionalidades"
+    help: "Te ayudamos"
+    contact: "Contacta con nosotros"
   web:
     copyright: "Una aplicación realizada por David Táboas"
+    home: "Portada"
+    features: "¿Qué puedes hacer?"
+    help: "¿Te ayudamos a empezar?"
+    contact: "Contactar"
+    blog: "Blog"
+  home:
+    route:
+      title: "Ruta y datos principales"
+      text: "Podrás crear una ruta para tu viaje, para tener a mano tus destinos principales ubicados. Además, podrás indicar los datos más importantes para no perder detalle de tu gran viaje."
+    budget:
+      title: "Presupuesto"
+      text: "En un viaje importa, y mucho, el presupuesto, por eso ponemos a tu alcance una forma muy sencilla de gestionar tus futuros gastos con un diseño muy visual."
+    stuff:
+      title: "Inventario y tareas"
+      text: "Hay que ser cuidadoso haciendo la maleta o la mochila, por ello dispondrás de una lista para tu inventario. Por otra parte, si tienes que realizar ciertas tareas para tu viaje, hacemos que no las pierdas de vista."
   # ERRORES
   err:
     serverError:

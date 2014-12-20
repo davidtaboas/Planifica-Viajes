@@ -21,14 +21,14 @@
     margin-top: 6px;
   }
 
-
+  .navbar-nav > li > a {
+    padding: 0 !important;
+  }
 
 
 }
 
-.navbar-nav > li > a {
-  padding: 0 !important;
-}
+
 #trip {
 
   .uploader, .user-management {

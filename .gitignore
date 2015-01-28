@@ -29,6 +29,7 @@ pickle-email-*.html
 
 # Ignore bower
 /lib/assets/bower_components*
+/vendor/assets/bower_components*
 
 # Ignore compile assets
 public/uploads/**
